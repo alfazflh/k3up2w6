@@ -1,0 +1,359 @@
+<style>
+#detailModal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 40px 16px;
+}
+
+#detailModal.flex { display: flex; }
+
+#printArea {
+    background: white;
+    border: 4px solid black;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 700px;
+    padding: 24px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+}
+
+.modal-buttons {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.save-pdf-btn, .close-btn {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.save-pdf-btn {
+    background: #196275;
+    color: white;
+    width: 140px;
+    height: 30px;
+}
+
+.close-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    background: white;
+    color: black;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-left img {
+    width: 50px;
+    height: 60px;
+}
+
+.header-left h2 {
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.k3-logo {
+    width: 250px;
+    height: auto;
+}
+
+.dokumen-logo {
+    width: 100px;
+    height: auto;
+}
+
+.dokumen-box {
+    border: 2px solid #000;
+    padding: 4px 8px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    background: white;
+}
+
+.title-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title-section h1 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0 10px;
+    font-size: 11px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 1px;
+    margin-top: 10px;
+}
+
+.dokumen-logo {
+    width: 150px;
+    height: auto;
+}
+
+.title-section {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.title-section h1 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+}
+
+.title-section p {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.inspection-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    font-size: 10px;
+}
+
+.inspection-table th,
+.inspection-table td {
+    border: 1px solid #000;
+    padding: 4px 6px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.inspection-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.inspection-table .section-header {
+    background-color: #e0e0e0;
+    font-weight: bold;
+    text-align: left;
+    font-size: 10px;
+}
+
+.inspection-table .number-col {
+    width: 8%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.inspection-table .description-col {
+    width: 72%;
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+.inspection-table .status-col {
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.footer-section {
+display: flex;
+justify-content: space-between;
+align-items: flex-start; /* ini penting agar catatan & signature sejajar dari atas */
+margin-top: 20px;
+font-size: 10px;
+}
+
+
+.catatan-section {
+flex: 1;
+padding-right: 20px;
+font-size: 11px;
+line-height: 1.5;
+margin-top: 0; /* hilangkan -15px karena akan bikin kacau */
+}
+
+
+
+.signature-section {
+position: relative;
+width: 130px;
+margin: 0 auto;
+text-align: center;
+font-size: 10px;
+padding-top: 8px;
+}
+
+.signature-section .ttd-wrapper {
+position: relative;
+height: 50px;
+}
+
+.signature-section img {
+width: 60px;
+height: auto;
+position: absolute;
+top: -10px !important;
+left: 50%;
+transform: translateX(-50%);
+z-index: 2;
+}
+
+.signature-section .name {
+font-weight: bold;
+position: relative;
+z-index: 1;
+margin-top: 10px;
+margin-bottom: 0;
+}
+
+.info-footer {
+    margin-top: 15px;
+    font-size: 9px;
+    padding-top: 8px;
+}
+
+.info-footer div {
+    margin-bottom: 3px;
+}
+</style>
+
+
+
+
+<!-- Modal Detail -->
+    <div id="detailModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 items-center justify-center">
+        <div class="bg-white relative" style="border-radius: 8px; width: 750px">
+            <div class="modal-buttons">
+                <button onclick="downloadPDF()" class="save-pdf-btn">Save As PDF</button>
+                <button onclick="closeModal()" class="close-btn">&times;</button>
+            </div>
+            <br><br><br>
+            
+            <div id="printArea" style="justify-content: center; margin: 0 auto;">
+                <div class="modal-header">
+                    <div class="header-left">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Logo_PLN.png" alt="PLN Logo">
+                        <img src="https://ik.imagekit.io/pln/pt?updatedAt=1754287380671" alt="teks logo"
+                        style="width: 200px; height: auto; display: block; margin: 0 auto;">                   
+                    </div>
+                    <div class="header-right">
+                        <img class="k3-logo" src="https://ik.imagekit.io/pln/iso.png?updatedAt=1754449539965" alt="K3 Logo">
+                    </div>                    
+                </div>
+
+                <div class="title-section">
+                    <h1>FORM PEMERIKSAAN ALAT P3K</h1>
+                
+                    <div class="info-wrapper">
+                        <div class="info-item">
+                            <div><strong>Unit Kerja / Lokasi</strong> : <span>{{ $firstItem->id_p3k }}</span>
+                            </div>
+                            <div><strong>Tanggal Pemeriksaan</strong> : <span id="detail-tanggal"></span>
+                            </div>
+                            <div><strong>Petugas Pemeriksaan</strong> : <span id="detail-petugas"></span>
+                            </div>
+                            <span id="detail-tanggal" class="hidden"></span>
+                        </div>
+                
+                        <img class="dokumen-logo" src="https://ik.imagekit.io/pln/dokumen30mei.png?updatedAt=1754449580231" alt="dok Logo">
+                    </div>
+                </div>
+
+                <table class="inspection-table">
+                    <thead style="border: 1px solid black; border-collapse: collapse;">
+                        <tr>
+                            <th rowspan="2" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 40px;">NO</th>
+                            <th rowspan="2" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 180px;">NAMA BARANG*)</th>
+                            <th rowspan="2" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 70px;">SATUAN</th>
+                            <th rowspan="2" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 70px;">JUMLAH</th>
+                            <th colspan="3" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold;">JENIS PEMERIKSAAN</th>
+                            <th rowspan="2" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 100px;">PARAF PETUGAS</th>
+                        </tr>
+                        <tr>
+                            <th style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 110px;">FISIK / VISUAL**)</th>
+                            <th style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 110px;">TANGGAL KADALUARSA</th>
+                            <th style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 150px;">CATATAN</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody id="detail-pemeriksaan-table">
+                        <!-- akan diisi lewat JS -->
+                    </tbody>
+                </table>
+
+                <div class="footer-section">
+                    <div class="catatan-section">
+                        <span>*) : Sesuai Standar Permenakertrans No.PER.15/MEN/VIII/2008</span><br>
+                        <span>**) : - "Baik" jika sesuai standar.</span><br>
+                        <span>      -"Angka" jika jumlah kurang dari standar.</span><br>
+                        <span>      - Saat pemeriksaan bulanan diisi sesuai dengan standar.</span>
+                    </div>
+                    <div class="signature-section">
+                        <span class="font-normal" id="tanggal-bawah">-</span>
+                        <div><strong>Team Leader K3L & KAM</strong></div>
+                        <div class="ttd-wrapper">
+                            <img src="https://ik.imagekit.io/pln/ttd.png?updatedAt=1752822909227" alt="Tanda Tangan">
+                        </div>
+                        <div class="name">KUKUH TRI UTOMO</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
