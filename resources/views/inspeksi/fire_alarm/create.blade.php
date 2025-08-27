@@ -46,7 +46,7 @@
 <div id="spacer" class="pt-32"></div>
 
 <div class="fixed max-w-6xl mx-auto px-4 mt-6">
-    <a href="{{ route('fire_alarm.show', ['id_firealarm' => $firealarm->id_firealarm]) }}"
+    <a href="{{ route('fire_alarm.hasil', ['id_firealarm' => $firealarm->id_firealarm]) }}"
        class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-300">
         ←
     </a>

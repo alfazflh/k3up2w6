@@ -52,7 +52,7 @@
             @endphp
 
             @foreach($sorted as $rumahpompa)
-                <a href="{{ route('rumah_pompa.show', $rumahpompa->id_rumah) }}"
+                <a href="{{ route('rumah_pompa.hasil', $rumahpompa->id_rumah) }}"
                    class="block bg-primary hover:bg-primary-dark text-white text-center font-semibold py-6 rounded-xl shadow transition duration-300">
                     RUMAH POMPA {{ $rumahpompa->id_rumah }}
                 </a>

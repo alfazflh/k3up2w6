@@ -62,7 +62,7 @@
             @endphp
             
             @foreach($sorted as $firealarm)
-                <a href="{{ route('fire_alarm.show', $firealarm->id_firealarm) }}"
+                <a href="{{ route('fire_alarm.hasil', $firealarm->id_firealarm) }}"
                    class="block bg-primary hover:bg-primary-dark text-white text-center font-semibold py-6 rounded-xl shadow transition duration-300">
                     FIRE ALARM {{ $firealarm->id_firealarm }}
                 </a>

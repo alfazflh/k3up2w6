@@ -59,7 +59,7 @@
     <div class="max-w-6xl mx-auto px-4 py-10">
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             @foreach($apars->unique('id_apar') as $apar)
-                <a href="{{ route('apar.show', $apar->id_apar) }}"
+                <a href="{{ route('apar.hasil', $apar->id_apar) }}"
                    class="block bg-primary hover:bg-primary-dark text-white text-center font-semibold py-6 rounded-xl shadow transition duration-300">
                     APAR {{ $apar->id_apar }}
                 </a>

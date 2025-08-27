@@ -8,34 +8,69 @@
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/9/97/Logo_PLN.png" type="image/png" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        .bg-primary { background-color: #196275; }
+        .bg-primary { background-color: #1f7389; }
         .text-primary { color: #196275; }
         .hover\:bg-primary-dark:hover { background-color: #134e5a; }
     </style>
 </head>
 <body id="main-body" class="bg-gray-100 font-sans">
 
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-primary border-b shadow px-6 py-4">
-        <div class="flex items-center justify-between">
-            <div class="w-1/4 flex justify-start">
-                <a href="{{ url()->current() }}">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" alt="Logo PLN" class="h-20">
+        <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-primary border-b shadow px-4 py-3">
+            <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+        
+            <!-- Bagian Logo (Mobile: semua logo di atas) -->
+            <div class="flex justify-center md:justify-start items-center gap-4 md:gap-0">
+                <!-- Logo Danantara -->
+                <a href="{{ url()->current() }}" class="md:mr-auto">
+                <img src="https://www.danantaraindonesia.com/images/v3/danantara-logo-black-v3.png" 
+                    alt="Logo Danantara" 
+                    class="h-14 w-32 md:h-16 md:w-40 object-contain" />
                 </a>
-                
+        
+                <!-- Logo PLN (Mobile) -->
+                <a href="{{ url()->current() }}" class="md:hidden">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
+                    alt="Logo PLN" 
+                    class="h-14 w-14 md:h-16 md:w-16 object-contain" />
+                </a>
+        
+                <!-- Logo HSSE (Mobile) -->
+                <a href="{{ url()->current() }}" class="md:hidden">
+                <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
+                    alt="Logo HSSE" 
+                    class="h-14 w-14 md:h-16 md:w-16 object-contain" />
+                </a>
             </div>
-    
-            <div class="w-2/4 text-center">
-                <h1 class="text-lg sm:text-2xl md:text-3xl font-bold text-white leading-tight">
-                    DASHBOARD PERALATAN TANGGAP DARURAT</h1>
-                <h2 class="text-base lg:text-lg text-white font-semibold mt-1">
-                    PLN PUSHARLIS UP2WVI</h2>
+        
+            <!-- Judul Tengah -->
+            <div class="text-center order-2 md:order-none md:col-span-1">
+                <div class="w-full flex justify-center px-4">
+                    <h1 class="font-bold text-white leading-tight text-center whitespace-normal"
+                        style="font-size: clamp(1rem, 2vw + 0.5rem, 2rem);">
+                      DASHBOARD PERALATAN TANGGAP DARURAT
+                    </h1>
+                </div>                                  
+                <h2 class="text-sm sm:text-base md:text-xl text-white font-semibold mt-1">
+                PLN PUSHARLIS UP2WVI
+                </h2>
             </div>
-
-            <div class="w-1/4 flex justify-end">
-                <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" alt="Logo HSSE" class="h-20">
+        
+            <!-- Logo PLN & HSSE (Desktop) -->
+            <div class="hidden md:flex justify-end items-center gap-5">
+                <a href="{{ url()->current() }}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
+                    alt="Logo PLN" 
+                    class="h-16 w-16 md:h-20 md:w-20 object-contain" />
+                </a>
+                <a href="{{ url()->current() }}">
+                <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
+                    alt="Logo HSSE" 
+                    class="h-16 w-16 md:h-20 md:w-20 object-contain" />
+                </a>
             </div>
-        </div>
-    </header>
+        
+            </div>
+        </header>
     
     
 
@@ -50,16 +85,41 @@
                     ['label' => 'Box Hydrant', 'route' => 'boxhydrant.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
                     ['label' => 'Rumah Pompa', 'route' => 'rumah_pompa.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
                     ['label' => 'Kotak P3K', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/pngwing.com.png'],
+                    ['label' => 'IKA', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/pngwing.com.png'],
+                    ['label' => 'Kritik & Saran', 'route' => 'p3k.index', 'icon' => 'https://blood4life.id/img/Icon_Kritik_Saran.png?1584552386'],
                 ];
             @endphp
-
-            @foreach ($alat as $item)
-                <a href="{{ route($item['route']) }}" class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center hover:bg-gray-100 transition">
-                    <img src="{{ $item['icon'] }}" alt="{{ $item['label'] }}" class="w-20 h-20 object-contain mb-2">
-                    <span class="text-md font-semibold text-gray-800">{{ $item['label'] }}</span>
+        
+            {{-- 6 item pertama --}}
+            @foreach (array_slice($alat, 0, 6) as $item)
+                <a href="{{ route($item['route']) }}" 
+                   class="bg-white shadow-md rounded-lg p-6 sm:p-4 min-h-[150px] flex flex-col items-center justify-center hover:bg-gray-100 transition">
+                    <img src="{{ $item['icon'] }}" alt="{{ $item['label'] }}" class="w-24 h-24 sm:w-20 sm:h-20 object-contain mb-3">
+                    <span class="text-base sm:text-md font-semibold text-gray-800">{{ $item['label'] }}</span>
                 </a>
             @endforeach
+        
+            {{-- 2 item terakhir (tetap sama besar, tapi center) --}}
+            <div class="col-span-full grid grid-cols-2 gap-6 justify-center md:w-2/3 mx-auto">
+                @foreach (array_slice($alat, 6) as $item)
+                    <a href="{{ route($item['route']) }}" 
+                       class="bg-white shadow-md rounded-lg 
+                              p-8 sm:p-4 
+                              min-h-[180px] sm:min-h-[150px] 
+                              flex flex-col items-center justify-center 
+                              hover:bg-gray-100 transition">
+                        <img src="{{ $item['icon'] }}" 
+                             alt="{{ $item['label'] }}" 
+                             class="w-20 h-20 sm:w-16 sm:h-16 object-contain mb-3">
+                        <span class="text-base sm:text-md font-semibold text-gray-800">{{ $item['label'] }}</span>
+                    </a>
+                @endforeach
+            </div>
+            
+            
         </div>
+        
+        
 
         <div class="bg-white shadow-md rounded-lg p-4 sm:p-6 text-center">
             <img src="{{ asset('images/denah.jpg') }}" alt="Denah Lokasi" id="denah-img"

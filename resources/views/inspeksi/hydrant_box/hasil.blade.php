@@ -385,7 +385,7 @@
     <div id="spacer" class="pt-32"></div>
 
     <div class="fixed max-w-6xl mx-auto px-4 mt-6">
-        <a href="{{ route('boxhydrant.show', ['id_boxhydrant' => $boxhydrant->id_boxhydrant]) }}"
+        <a href="{{ route('boxhydrant.index', ['id_boxhydrant' => $boxhydrant->id_boxhydrant]) }}"
            class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-300">
             ←
         </a>
@@ -564,7 +564,7 @@
             </div>
             <div class="signature-section">
                 <span class="font-normal" id="tanggal-bawah">-</span>
-                <p>Asman K3L & Kam/TL K3L & Kam</p>
+                <p>Team Leader K3L & Kam</p>
                 <img src="https://ik.imagekit.io/pln/ttd.png?updatedAt=1752822909227" alt="Tanda Tangan">
                 <p>KUKUH TRI UTOMO</p>
             </div>

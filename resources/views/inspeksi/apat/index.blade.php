@@ -58,7 +58,7 @@
     <div class="max-w-6xl mx-auto px-4 py-10">
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             @foreach($apats->unique('id_apat') as $apat)
-                <a href="{{ route('apat.show', $apat->id_apat) }}"
+                <a href="{{ route('apat.hasil', $apat->id_apat) }}"
                    class="block bg-primary hover:bg-primary-dark text-white text-center font-semibold py-6 rounded-xl shadow transition duration-300">
                     APAT {{ $apat->id_apat }}
                 </a>

@@ -690,7 +690,7 @@ margin-top: 0;
             </div>
             <div class="signature-section">
                 <span class="!font-normal" id="tanggal-bawah">-</span>
-                <p>Asman K3L & Kam/TL K3L & Kam</p>
+                <p>Team Leader K3L & Kam</p>
                 <img src="https://ik.imagekit.io/pln/ttd.png?updatedAt=1752822909227" alt="Tanda Tangan">
                 <p>KUKUH TRI UTOMO</p>
             </div>

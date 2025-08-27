@@ -51,7 +51,7 @@
 <div id="spacer" class="pt-32"></div>
 
 <div class="fixed max-w-6xl mx-auto px-4 mt-6">
-    <a href="{{ route('rumah_pompa.show', ['id_rumah' => $rumah->id_rumah]) }}"
+    <a href="{{ route('rumah_pompa.hasil', ['id_rumah' => $rumah->id_rumah]) }}"
        class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition">
         ←
     </a>

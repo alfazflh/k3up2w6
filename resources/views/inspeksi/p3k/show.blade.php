@@ -58,30 +58,13 @@
     </div>
 
     <div class="max-w-6xl mx-auto px-4 mt-12 grid grid-cols-1 sm:grid-cols-2 gap-8 text-center">
-        <a href="{{ route('p3k.inspeksi', ['id_p3k' => $id_p3k]) }}"
-           class="flex flex-col items-center justify-center bg-gray-100 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 p-6">
-            <img src="https://ik.imagekit.io/pln/insp3k.png?updatedAt=1754380121375"
-                 alt="Inspeksi Fire Alarm" class="h-28 md:h-36 object-contain">
-            <span class="mt-4 text-primary font-semibold text-base md:text-lg text-center">
-                INSPEKSI KOTAK P3K
-            </span>
-        </a>
 
         <a href="{{ route('p3k.hasil', ['id_p3k' => $id_p3k]) }}"
            class="flex flex-col items-center justify-center bg-gray-100 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 p-6">
             <img src="https://ik.imagekit.io/pln/hslp3k.png?updatedAt=1754380121206"
                  alt="Hasil Inspeksi" class="h-28 md:h-36 object-contain">
             <span class="mt-4 text-primary font-semibold text-base md:text-lg text-center">
-                HASIL INSPEKSI KOTAK P3K
-            </span>
-        </a>
-
-        <a href="{{ route('p3k.pemakaian', ['id_p3k' => $id_p3k]) }}"
-           class="flex flex-col items-center justify-center bg-gray-100 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 p-6">
-            <img src="https://ik.imagekit.io/pln/panduan.png?updatedAt=1754380121165"
-                 alt="Inspeksi Fire Alarm" class="h-28 md:h-36 object-contain">
-            <span class="mt-4 text-primary font-semibold text-base md:text-lg text-center">
-                PEMAKAIAN KOTAK P3K
+                PEMERIKSAAN KOTAK P3K
             </span>
         </a>
 
@@ -90,7 +73,7 @@
             <img src="https://ik.imagekit.io/pln/pemakaian.png?updatedAt=1754380120806"
                  alt="Hasil Inspeksi" class="h-28 md:h-36 object-contain">
             <span class="mt-4 text-primary font-semibold text-base md:text-lg text-center">
-                HASIL PEMAKAIAN KOTAK P3K
+                PEMAKAIAN KOTAK P3K
             </span>
         </a>
 

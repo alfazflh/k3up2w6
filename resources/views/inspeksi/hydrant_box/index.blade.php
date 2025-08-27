@@ -56,7 +56,7 @@
             @endphp
             
             @foreach($sorted as $boxhydrant)
-                <a href="{{ route('boxhydrant.show', $boxhydrant->id_boxhydrant) }}"
+                <a href="{{ route('boxhydrant.hasil', $boxhydrant->id_boxhydrant) }}"
                    class="block bg-primary hover:bg-primary-dark text-white text-center font-semibold py-6 rounded-xl shadow transition duration-300">
                     BOX HYDRANT {{ $boxhydrant->id_boxhydrant }}
                 </a>
