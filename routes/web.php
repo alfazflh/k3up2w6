@@ -15,6 +15,7 @@ use App\Http\Controllers\Inspeksi\PemeriksaanBoxHydrantController;
 use App\Http\Controllers\Inspeksi\PemeriksaanRumahPompaController;
 use App\Http\Controllers\Inspeksi\PemeriksaanP3kController;
 use App\Http\Controllers\Inspeksi\PemakaianP3kController;
+use App\Http\Controllers\Inspeksi\SaranController;
 
 Route::get('/', fn () => view('welcome'))->name('welcome');
 
@@ -96,7 +97,7 @@ Route::prefix('inspeksi')->group(function () {
     });
 
 
-    
+
 
     Route::controller(P3kController::class)->prefix('kotak-p3k')->group(function () {
         Route::get('/', 'index')->name('p3k.index');
@@ -126,7 +127,10 @@ Route::prefix('inspeksi')->group(function () {
         Route::post('/edit-sequential', 'editSequentialForm')->name('pemakaian-p3k.edit-sequential');
         Route::put('/{id}/update-step', 'updateStep')->name('pemakaian-p3k.update-step');
     });
-});
+
+    Route::resource('saran', SaranController::class)->except(['show']);
+    Route::get('/saran/hasil', [SaranController::class, 'hasil'])->name('saran.hasil');       
+    });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

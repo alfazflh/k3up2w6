@@ -78,46 +78,68 @@
     <main class="p-6">
         <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10 text-center">
             @php
-                $alat = [
-                    ['label' => 'APAR', 'route' => 'apar.index', 'icon' => 'https://seduhteh.wordpress.com/wp-content/uploads/2015/08/apar.png'],
-                    ['label' => 'APAT', 'route' => 'apat.index', 'icon' => 'https://ik.imagekit.io/pln/sekop.png'],
-                    ['label' => 'Fire Alarm', 'route' => 'fire_alarm.index', 'icon' => 'https://phabcart.imgix.net/cdn/scdn/images/uploads/firealarm_square_web_600.png?auto=compress&lossless=1&w=500'],
-                    ['label' => 'Box Hydrant', 'route' => 'boxhydrant.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
-                    ['label' => 'Rumah Pompa', 'route' => 'rumah_pompa.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
-                    ['label' => 'Kotak P3K', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/pngwing.com.png'],
-                    ['label' => 'IKA', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/pngwing.com.png'],
-                    ['label' => 'Kritik & Saran', 'route' => 'p3k.index', 'icon' => 'https://blood4life.id/img/Icon_Kritik_Saran.png?1584552386'],
+            $alat = [
+                ['label' => 'APAR', 'route' => 'apar.index', 'icon' => 'https://seduhteh.wordpress.com/wp-content/uploads/2015/08/apar.png'],
+                ['label' => 'APAT', 'route' => 'apat.index', 'icon' => 'https://ik.imagekit.io/pln/sekop.png'],
+                ['label' => 'Fire Alarm', 'route' => 'fire_alarm.index', 'icon' => 'https://phabcart.imgix.net/cdn/scdn/images/uploads/firealarm_square_web_600.png?auto=compress&lossless=1&w=500'],
+                ['label' => 'Box Hydrant', 'route' => 'boxhydrant.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
+                ['label' => 'Rumah Pompa', 'route' => 'rumah_pompa.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
+                ['label' => 'Kotak P3K', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/pngwing.com.png'],
+                ['label' => 'IKA', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/pngwing.com.png'],
+            ];
+        
+            // Kritik & Saran (selalu ada, tapi rute tergantung role)
+            if (Auth::check() && Auth::user()->role === 'admin') {
+                $alat[] = [
+                    'label' => 'Kritik & Saran',
+                    'route' => 'saran.hasil',
+                    'icon'  => 'https://blood4life.id/img/Icon_Kritik_Saran.png?1584552386'
                 ];
-            @endphp
+            } else {
+                $alat[] = [
+                    'label' => 'Kritik & Saran',
+                    'route' => 'saran.create',
+                    'icon'  => 'https://blood4life.id/img/Icon_Kritik_Saran.png?1584552386'
+                ];
+            }
+        @endphp
+        
         
             {{-- 6 item pertama --}}
             @foreach (array_slice($alat, 0, 6) as $item)
                 <a href="{{ route($item['route']) }}" 
                    class="bg-white shadow-md rounded-lg p-6 sm:p-4 min-h-[150px] flex flex-col items-center justify-center hover:bg-gray-100 transition">
-                    <img src="{{ $item['icon'] }}" alt="{{ $item['label'] }}" class="w-24 h-24 sm:w-20 sm:h-20 object-contain mb-3">
-                    <span class="text-base sm:text-md font-semibold text-gray-800">{{ $item['label'] }}</span>
+                    <img src="{{ $item['icon'] }}" 
+                         alt="{{ $item['label'] }}" 
+                         class="w-24 h-24 sm:w-20 sm:h-20 object-contain mb-3">
+                    <span class="text-base sm:text-md font-semibold text-gray-800">
+                        {{ $item['label'] }}
+                    </span>
                 </a>
             @endforeach
         
-            {{-- 2 item terakhir (tetap sama besar, tapi center) --}}
-            <div class="col-span-full grid grid-cols-2 gap-6 justify-center md:w-2/3 mx-auto">
-                @foreach (array_slice($alat, 6) as $item)
-                    <a href="{{ route($item['route']) }}" 
-                       class="bg-white shadow-md rounded-lg 
-                              p-8 sm:p-4 
-                              min-h-[180px] sm:min-h-[150px] 
-                              flex flex-col items-center justify-center 
-                              hover:bg-gray-100 transition">
-                        <img src="{{ $item['icon'] }}" 
-                             alt="{{ $item['label'] }}" 
-                             class="w-20 h-20 sm:w-16 sm:h-16 object-contain mb-3">
-                        <span class="text-base sm:text-md font-semibold text-gray-800">{{ $item['label'] }}</span>
-                    </a>
-                @endforeach
-            </div>
-            
-            
+            {{-- Sisa item (mulai dari index ke-6 sampai habis) --}}
+            @if(count($alat) > 6)
+                <div class="col-span-full grid grid-cols-2 gap-6 justify-center md:w-2/3 mx-auto">
+                    @foreach (array_slice($alat, 6) as $item)
+                        <a href="{{ route($item['route']) }}" 
+                           class="bg-white shadow-md rounded-lg 
+                                  p-8 sm:p-4 
+                                  min-h-[180px] sm:min-h-[150px] 
+                                  flex flex-col items-center justify-center 
+                                  hover:bg-gray-100 transition">
+                            <img src="{{ $item['icon'] }}" 
+                                 alt="{{ $item['label'] }}" 
+                                 class="w-20 h-20 sm:w-16 sm:h-16 object-contain mb-3">
+                            <span class="text-base sm:text-md font-semibold text-gray-800">
+                                {{ $item['label'] }}
+                            </span>
+                        </a>
+                    @endforeach
+                </div>
+            @endif
         </div>
+        
         
         
 

@@ -667,7 +667,7 @@ margin-top: 0;
                     <th rowspan="2" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 50px;">SATUAN</th>
                     <th rowspan="2" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 50px;">JUMLAH</th>
                     <th colspan="3" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold;">JENIS PEMERIKSAAN</th>
-                    <th rowspan="2" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 100px;">PARAF PETUGAS</th>
+                    <th rowspan="2" style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 100px;">NAMA PETUGAS</th>
                 </tr>
                 <tr>
                     <th style="border: 1px solid black; text-align: center; vertical-align: middle; padding: 4px; font-weight: bold; width: 90px;">FISIK / VISUAL**)</th>
