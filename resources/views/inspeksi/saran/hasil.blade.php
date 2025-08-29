@@ -16,7 +16,7 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body class="bg-white text-gray-800">
+<body id="main-body" class="bg-white text-gray-800">
 
     <!-- HEADER -->
     <header id="main-header" class="bg-primary text-white px-4 py-4 fixed top-0 left-0 right-0 z-50 shadow-md">
@@ -359,6 +359,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+function setBodyPadding() {
+            const header = document.getElementById('main-header');
+            const spacer = document.getElementById('spacer');
+            if (header && spacer) {
+                const headerHeight = header.offsetHeight;
+                spacer.style.paddingTop = `${headerHeight + 3}px`; 
+            }
+        }
+
+        window.addEventListener('load', setBodyPadding);
+        window.addEventListener('resize', setBodyPadding);
+
+
+        function openModal() {
+        document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
 
     </script>
     

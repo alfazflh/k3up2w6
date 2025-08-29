@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Saran</title>
+    <title>Dashboard Kritik dan Saran K3L & Keamanan UP2WVI</title>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/9/97/Logo_PLN.png" type="image/png" />
     @vite('resources/css/app.css')
     <style>

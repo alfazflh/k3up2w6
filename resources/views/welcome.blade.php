@@ -18,31 +18,25 @@
         <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-primary border-b shadow px-4 py-3">
             <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
         
-            <!-- Bagian Logo (Mobile: semua logo di atas) -->
             <div class="flex justify-center md:justify-start items-center gap-4 md:gap-0">
-                <!-- Logo Danantara -->
                 <a href="{{ url()->current() }}" class="md:mr-auto">
                 <img src="https://www.danantaraindonesia.com/images/v3/danantara-logo-black-v3.png" 
                     alt="Logo Danantara" 
                     class="h-14 w-32 md:h-16 md:w-40 object-contain" />
                 </a>
-        
-                <!-- Logo PLN (Mobile) -->
+
                 <a href="{{ url()->current() }}" class="md:hidden">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
                     alt="Logo PLN" 
                     class="h-14 w-14 md:h-16 md:w-16 object-contain" />
                 </a>
-        
-                <!-- Logo HSSE (Mobile) -->
                 <a href="{{ url()->current() }}" class="md:hidden">
                 <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
                     alt="Logo HSSE" 
                     class="h-14 w-14 md:h-16 md:w-16 object-contain" />
                 </a>
             </div>
-        
-            <!-- Judul Tengah -->
+
             <div class="text-center order-2 md:order-none md:col-span-1">
                 <div class="w-full flex justify-center px-4">
                     <h1 class="font-bold text-white leading-tight text-center whitespace-normal"
@@ -54,8 +48,7 @@
                 PLN PUSHARLIS UP2WVI
                 </h2>
             </div>
-        
-            <!-- Logo PLN & HSSE (Desktop) -->
+
             <div class="hidden md:flex justify-end items-center gap-5">
                 <a href="{{ url()->current() }}">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
@@ -85,7 +78,7 @@
                 ['label' => 'Box Hydrant', 'route' => 'boxhydrant.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
                 ['label' => 'Rumah Pompa', 'route' => 'rumah_pompa.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
                 ['label' => 'Kotak P3K', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/pngwing.com.png'],
-                ['label' => 'IKA', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/pngwing.com.png'],
+                ['label' => 'IKA', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/audit.png'],
             ];
         
             // Kritik & Saran (selalu ada, tapi rute tergantung role)
