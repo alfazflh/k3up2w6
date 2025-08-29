@@ -8,7 +8,7 @@
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/9/97/Logo_PLN.png" type="image/png" />
     @vite('resources/css/app.css')
     <style>
-        .bg-primary { background-color: #196275; }
+        .bg-primary { background-color: #1f7389; }
         .text-primary { color: #196275; }
         .border-primary { border-color: #196275; }
         .hover\:bg-primary-dark:hover { background-color: #134e5a; }

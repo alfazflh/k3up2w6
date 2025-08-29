@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     <style>
-        .bg-primary { background-color: #196275; }
+        .bg-primary { background-color: #1f7389; }
         .text-primary { color: #196275; }
         .hover\:bg-primary-dark:hover { background-color: #134e5a; }
         #spacer { padding-top: 100px; }
@@ -110,7 +110,7 @@
     <div id="editModal" class="fixed inset-0 z-50 bg-black bg-opacity-50" style="display: none;">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="bg-white p-6 rounded-lg w-full max-w-xl max-h-[90vh] overflow-y-auto relative">
-                <button onclick="closeEditModal()" class="absolute top-2 right-2 text-xl hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center">
+                <button onclick="closeEditModal()" class="absolute top-2 right-2 text-xl rounded-full w-8 h-8 flex items-center justify-center">
                     &times;
                 </button>
                 <h2 class="text-lg font-bold text-center text-primary mb-4">Edit Saran</h2>

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @vite('resources/css/app.css')
     <style>
-        .bg-primary { background-color: #196275; }
+        .bg-primary { background-color: #1f7389; }
         .text-primary { color: #196275; }
         .hover\:bg-primary-dark:hover { background-color: #134e5a; }
     </style>

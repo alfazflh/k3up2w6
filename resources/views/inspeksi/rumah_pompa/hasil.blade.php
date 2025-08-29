@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     <style>
-        .bg-primary { background-color: #196275; }
+        .bg-primary { background-color: #1f7389; }
         .text-primary { color: #196275; }
         .hover\:bg-primary-dark:hover { background-color: #134e5a; }
 
