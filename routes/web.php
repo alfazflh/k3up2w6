@@ -139,6 +139,7 @@ Route::prefix('inspeksi')->group(function () {
         Route::post('/dokumen', [DokumenIkaController::class, 'store'])->name('dokumen.store');
         Route::delete('/dokumen/{id}', [DokumenIkaController::class, 'destroy'])->name('dokumen.destroy');
     });
+    
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

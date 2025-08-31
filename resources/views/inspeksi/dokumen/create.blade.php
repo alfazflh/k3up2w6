@@ -54,7 +54,7 @@
 
     <!-- TOMBOL BACK -->
     <div class="fixed max-w-6xl mx-auto px-4 mt-6">
-        <a href="{{ route('dokumen.hasil') }}"
+        <a href="{{ route('inspeksi.dokumen.hasil') }}"
            class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-300">
             ←
         </a>
@@ -62,7 +62,7 @@
 
     <!-- FORM UPLOAD DOKUMEN -->
     <div class="px-5 sm:px-6 md:px-8 lg:px-10">
-        <form id="form-dokumen" action="{{ route('dokumen.store') }}" method="POST" enctype="multipart/form-data"
+        <form id="form-dokumen" action="{{ route('inspeksi.dokumen.store') }}" method="POST" enctype="multipart/form-data"
               class="max-w-3xl mx-auto py-6 mt-8 mb-10 bg-gray-100 rounded-xl shadow-lg space-y-6 px-6 sm:px-8">
             @csrf
 

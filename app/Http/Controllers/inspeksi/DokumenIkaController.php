@@ -46,4 +46,11 @@ class DokumenIkaController extends Controller
 
         return redirect()->route('inspeksi.dokumen.hasil')->with('success', 'Dokumen berhasil dihapus!');
     }
+
+    public function show($id)
+{
+    $dokumen = DokumenIka::findOrFail($id);
+    return view('inspeksi.dokumen.show', compact('dokumen'));
+}
+
 }
