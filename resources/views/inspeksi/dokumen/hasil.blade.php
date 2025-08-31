@@ -58,7 +58,6 @@
                     <tr>
                         <th class="px-4 py-3 w-1/12">No</th>
                         <th class="px-4 py-3 w-3/12">Nama Dokumen</th>
-                        <th class="px-4 py-3 w-2/12 text-center">File</th>
                         <th class="px-4 py-3 w-4/12 text-center">Aksi</th>                        
                     </tr>
                 </thead>
@@ -67,29 +66,33 @@
                         <tr>
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $item->nama_dokumen }}</td>
+                            </td>
                             <td class="px-4 py-3 text-center">
-                                <a href="{{ asset('storage/dokumen_ika/'.$item->file_dokumen) }}" target="_blank"
-                                   class="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded">
-                                   Lihat
-                                </a>
+                                <div class="flex flex-wrap gap-2 justify-center">
+                                    <a href="{{ asset('storage/dokumen_ika/'.$item->file_dokumen) }}" target="_blank"
+                                        class="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded">
+                                        Lihat Dokumen
+                                    </a>
+                            
+                                    @if(Auth::check() && Auth::user()->role === 'admin')
+                                        <button type="button" onclick="openModal({{ $item->id }}, '{{ $item->nama_dokumen }}')"
+                                            class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded">
+                                            Edit
+                                        </button>
+                            
+                                        <form action="{{ route('inspeksi.dokumen.destroy', $item->id) }}" method="POST" 
+                                            onsubmit="return confirmDelete(this)">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
                             </td>
-                            <td class="px-4 py-3 text-center space-x-2">
-                                <!-- Tombol Edit -->
-                                <button type="button" onclick="openModal({{ $item->id }}, '{{ $item->nama_dokumen }}')"
-                                    class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded">
-                                    Edit
-                                </button>
-    
-                                <!-- Hapus -->
-                                <form action="{{ route('inspeksi.dokumen.destroy', $item->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(this)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" 
-                                        class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">
-                                        Hapus
-                                    </button>
-                                </form>
-                            </td>
+                            
                         </tr>
                     @empty
                         <tr>
@@ -116,7 +119,7 @@
                     <input type="text" name="nama_dokumen" id="edit_nama" class="w-full border border-gray-300 rounded-lg px-4 py-2" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block font-semibold mb-1">Upload File (Opsional)</label>
+                    <label class="block font-semibold mb-1">Upload File Baru (Opsional)</label>
                     <input type="file" name="file_dokumen" class="w-full border border-gray-300 rounded-lg px-4 py-2">
                 </div>
                 <div class="flex justify-end space-x-2">
@@ -146,6 +149,17 @@
 
 
     <script>
+function setBodyPadding() {
+            const header = document.getElementById('main-header');
+            const spacer = document.getElementById('spacer');
+            if (header && spacer) {
+                const headerHeight = header.offsetHeight;
+                spacer.style.paddingTop = `${headerHeight + 3}px`; 
+            }
+        }
+
+        window.addEventListener('load', setBodyPadding);
+        window.addEventListener('resize', setBodyPadding);
 
     function openModal(id, nama) {
         const modal = document.getElementById('editModal');

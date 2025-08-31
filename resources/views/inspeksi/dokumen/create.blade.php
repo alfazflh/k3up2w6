@@ -13,7 +13,7 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body class="bg-white text-gray-800">
+<body id="main-body" class="bg-white text-gray-800">
 
     <!-- HEADER -->
     <header id="main-header" class="bg-primary text-white px-4 py-4 fixed top-0 left-0 right-0 z-50 shadow-md">
@@ -72,9 +72,9 @@
             </div>
 
             <div class="bg-white p-4 rounded-lg shadow-sm">
-                <label class="block font-semibold mb-1">Upload File <span class="text-red-500">*</span></label>
+                <label class="block font-semibold mb-1">Upload File Dokumen <span class="text-red-500">*</span></label>
                 <input type="file" name="file_dokumen" class="w-full border border-gray-300 rounded-lg px-4 py-2" required>
-                <p class="text-sm text-gray-500 mt-1">Format: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, JPG, PNG (Max: 5MB)</p>
+                <p class="text-sm text-gray-500 mt-1">Format: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, JPG, PNG</p>
             </div>
 
             <div class="text-center">
@@ -88,14 +88,15 @@
 
     <!-- JS FIX HEADER -->
     <script>
-        function setBodyPadding() {
+            function setBodyPadding() {
             const header = document.getElementById('main-header');
             const spacer = document.getElementById('spacer');
             if (header && spacer) {
                 const headerHeight = header.offsetHeight;
-                spacer.style.paddingTop = `${headerHeight + 3}px`;
+                spacer.style.paddingTop = `${headerHeight + 3}px`; 
             }
         }
+
         window.addEventListener('load', setBodyPadding);
         window.addEventListener('resize', setBodyPadding);
     </script>
