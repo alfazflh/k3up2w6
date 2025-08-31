@@ -132,7 +132,21 @@
         + Tambah Dokumen
     </a>
 
+    @if(session('success'))
     <script>
+        Swal.fire({
+            title: 'Berhasil!',
+            text: "{{ session('success') }}",
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000 // dalam milidetik (2 detik)
+        });
+    </script>
+@endif
+
+
+    <script>
+
     function openModal(id, nama) {
         const modal = document.getElementById('editModal');
         modal.classList.remove('hidden');
