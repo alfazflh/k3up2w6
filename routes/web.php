@@ -16,6 +16,7 @@ use App\Http\Controllers\Inspeksi\PemeriksaanRumahPompaController;
 use App\Http\Controllers\Inspeksi\PemeriksaanP3kController;
 use App\Http\Controllers\Inspeksi\PemakaianP3kController;
 use App\Http\Controllers\Inspeksi\SaranController;
+use App\Http\Controllers\Inspeksi\DokumenIkaController;
 
 Route::get('/', fn () => view('welcome'))->name('welcome');
 
@@ -129,7 +130,14 @@ Route::prefix('inspeksi')->group(function () {
     });
 
     Route::resource('saran', SaranController::class)->except(['show']);
-    Route::get('/saran/hasil', [SaranController::class, 'hasil'])->name('saran.hasil');       
+    Route::get('/saran/hasil', [SaranController::class, 'hasil'])->name('saran.hasil');    
+    });
+
+    Route::prefix('inspeksi')->group(function () {
+        Route::get('/create', [DokumenIkaController::class, 'create'])->name('dokumen.create');
+        Route::post('/dokumen', [DokumenIkaController::class, 'store'])->name('dokumen.store');
+        Route::get('/hasil', [DokumenIkaController::class, 'hasil'])->name('dokumen.hasil');
+        Route::delete('/{id}', [DokumenIkaController::class, 'destroy'])->name('dokumen.destroy');
     });
 
 Route::middleware('auth')->group(function () {
