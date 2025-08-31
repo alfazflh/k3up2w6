@@ -58,8 +58,8 @@
                     <tr>
                         <th class="px-4 py-3 w-1/12">No</th>
                         <th class="px-4 py-3 w-3/12">Nama Dokumen</th>
-                        <th class="px-4 py-3 w-3/12">File</th>
-                        <th class="px-4 py-3 w-3/12 text-center">Aksi</th>                        
+                        <th class="px-4 py-3 w-2/12 text-center">File</th>
+                        <th class="px-4 py-3 w-4/12 text-center">Aksi</th>                        
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -67,12 +67,20 @@
                         <tr>
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $item->nama_dokumen }}</td>
-                            <td class="px-4 py-3">
-                                <a href="{{ asset('storage/dokumen_ika/'.$item->file_dokumen) }}" target="_blank" class="text-blue-600 hover:underline">
-                                    {{ $item->file_dokumen }}
+                            <td class="px-4 py-3 text-center">
+                                <a href="{{ asset('storage/dokumen_ika/'.$item->file_dokumen) }}" target="_blank"
+                                   class="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded">
+                                   Lihat
                                 </a>
                             </td>
-                            <td class="px-4 py-3 text-center space-x-1">
+                            <td class="px-4 py-3 text-center space-x-2">
+                                <!-- Tombol Edit -->
+                                <button type="button" onclick="openModal({{ $item->id }}, '{{ $item->nama_dokumen }}')"
+                                    class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded">
+                                    Edit
+                                </button>
+    
+                                <!-- Hapus -->
                                 <form action="{{ route('inspeksi.dokumen.destroy', $item->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(this)">
                                     @csrf
                                     @method('DELETE')
@@ -80,7 +88,7 @@
                                         class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">
                                         Hapus
                                     </button>
-                                </form>   
+                                </form>
                             </td>
                         </tr>
                     @empty
@@ -95,6 +103,29 @@
         </div>
         <br><br>
     </div>
+    
+    <!-- Modal Edit -->
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+            <h2 class="text-lg font-bold mb-4">Edit Dokumen</h2>
+            <form id="editForm" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="mb-4">
+                    <label class="block font-semibold mb-1">Nama Dokumen</label>
+                    <input type="text" name="nama_dokumen" id="edit_nama" class="w-full border border-gray-300 rounded-lg px-4 py-2" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block font-semibold mb-1">Upload File (Opsional)</label>
+                    <input type="file" name="file_dokumen" class="w-full border border-gray-300 rounded-lg px-4 py-2">
+                </div>
+                <div class="flex justify-end space-x-2">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Tambah Dokumen -->
     <a href="{{ route('inspeksi.dokumen.create') }}" class="fixed bottom-4 right-4 bg-gray-200 hover:bg-gray-300 text-primary rounded-full p-3 shadow-lg">
@@ -102,23 +133,40 @@
     </a>
 
     <script>
-        function confirmDelete(form) {
-            event.preventDefault();
-            Swal.fire({
-                title: 'Yakin hapus?',
-                text: "Dokumen akan dihapus permanen!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#e3342f',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
-        }
+    function openModal(id, nama) {
+        const modal = document.getElementById('editModal');
+        modal.classList.remove('hidden');
+
+        // set value
+        document.getElementById('edit_nama').value = nama;
+
+        // set action form
+        const form = document.getElementById('editForm');
+        form.action = "/inspeksi/dokumen/" + id; // sesuai resource route
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('editModal');
+        modal.classList.add('hidden');
+    }
+
+    function confirmDelete(form) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Yakin hapus?',
+            text: "Dokumen akan dihapus permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e3342f',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    }
     </script>
 
 </body>

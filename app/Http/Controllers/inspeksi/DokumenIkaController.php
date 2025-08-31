@@ -53,4 +53,33 @@ class DokumenIkaController extends Controller
     return view('inspeksi.dokumen.show', compact('dokumen'));
 }
 
+
+public function update(Request $request, $id)
+{
+    $dokumen = DokumenIka::findOrFail($id);
+
+    $request->validate([
+        'nama_dokumen' => 'required|string|max:255',
+        'file_dokumen' => 'nullable|file|max:51200', 
+    ]);
+
+    $dokumen->nama_dokumen = $request->nama_dokumen;
+
+    if ($request->hasFile('file_dokumen')) {
+        // hapus file lama
+        if ($dokumen->file_dokumen && file_exists(storage_path('app/public/dokumen_ika/'.$dokumen->file_dokumen))) {
+            unlink(storage_path('app/public/dokumen_ika/'.$dokumen->file_dokumen));
+        }
+
+        // simpan file baru
+        $fileName = time().'_'.$request->file('file_dokumen')->getClientOriginalName();
+        $request->file('file_dokumen')->storeAs('dokumen_ika', $fileName, 'public');
+        $dokumen->file_dokumen = $fileName;
+    }
+
+    $dokumen->save();
+
+    return redirect()->route('inspeksi.dokumen.hasil')->with('success', 'Dokumen berhasil diperbarui');
+}
+
 }
