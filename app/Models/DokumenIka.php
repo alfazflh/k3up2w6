@@ -13,4 +13,3 @@ class DokumenIka extends Model
 
     protected $fillable = ['nama_dokumen', 'file_dokumen'];
 }
-
