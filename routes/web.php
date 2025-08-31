@@ -133,11 +133,11 @@ Route::prefix('inspeksi')->group(function () {
     Route::get('/saran/hasil', [SaranController::class, 'hasil'])->name('saran.hasil');    
     });
 
-    Route::prefix('inspeksi')->group(function () {
-        Route::get('/create', [DokumenIkaController::class, 'create'])->name('dokumen.create');
+    Route::prefix('inspeksi')->name('inspeksi.')->group(function () {
+        Route::get('/dokumen/hasil', [DokumenIkaController::class, 'hasil'])->name('dokumen.hasil');
+        Route::get('/dokumen/create', [DokumenIkaController::class, 'create'])->name('dokumen.create');
         Route::post('/dokumen', [DokumenIkaController::class, 'store'])->name('dokumen.store');
-        Route::get('/hasil', [DokumenIkaController::class, 'hasil'])->name('dokumen.hasil');
-        Route::delete('/{id}', [DokumenIkaController::class, 'destroy'])->name('dokumen.destroy');
+        Route::delete('/dokumen/{id}', [DokumenIkaController::class, 'destroy'])->name('dokumen.destroy');
     });
 
 Route::middleware('auth')->group(function () {
