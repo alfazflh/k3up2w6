@@ -14,29 +14,61 @@
 </head>
 <body class="bg-white text-gray-800" id="main-body">
 
-    <header id="main-header" class="bg-primary text-white px-4 py-4 fixed top-0 left-0 right-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto flex items-center justify-between md:hidden">
-            <div class="flex items-center space-x-3">
-                <a href="{{ url()->current() }}">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" alt="Logo PLN" class="h-16 w-auto">
-                </a>
-            </div>
-            <div class="flex-1 text-center">
-                <h1 class="text-lg font-bold leading-tight">MONITORING BOX HYDRANT</h1>
-                <h2 class="text-sm text-white font-semibold mt-1">PLN PUSHARLIS UP2WVI</h2>
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-primary border-b shadow px-4 py-3">
+        <div class="relative flex items-center justify-between">
+
+        <div class="flex items-center gap-4">
+            <a href="{{ url()->current() }}">
+            <img src="https://www.danantaraindonesia.com/images/v3/danantara-logo-black-v3.png" 
+                alt="Logo Danantara" 
+                class="h-14 w-32 md:h-14 md:w-38 object-contain" />
+            </a>
+
+            <div class="flex md:hidden gap-3">
+            <a href="{{ url()->current() }}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
+                    alt="Logo PLN" 
+                    class="h-12 w-12 object-contain" />
+            </a>
+            <a href="{{ url()->current() }}">
+                <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
+                    alt="Logo HSSE" 
+                    class="h-12 w-12 object-contain" />
+            </a>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto hidden md:flex relative items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <a href="{{ url()->current() }}">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" alt="Logo PLN" class="h-20 w-auto">
-                </a>
-            </div>
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
-                <h1 class="text-2xl lg:text-3xl font-bold leading-tight">MONITORING BOX HYDRANT</h1>
-                <h2 class="text-base lg:text-lg text-white font-semibold mt-1">PLN PUSHARLIS UP2WVI</h2>
-            </div>
+        <div class="flex flex-col text-center md:hidden">
+            <h1 class="font-bold text-white leading-tight text-sm sm:text-lg">
+            MONITORING BOX HYDRANT
+            </h1>
+            <h2 class="text-xs sm:text-sm text-white font-semibold">
+            PLN PUSHARLIS UP2WVI
+            </h2>
+        </div>
+
+        <div class="absolute inset-x-0 text-center hidden md:block">
+            <h1 class="font-bold text-white leading-tight"
+                style="font-size: clamp(1rem, 2vw + 0.5rem, 2rem);">
+                MONITORING BOX HYDRANT
+            </h1>
+            <h2 class="text-sm sm:text-base md:text-xl text-white font-semibold mt-1">
+            PLN PUSHARLIS UP2WVI
+            </h2>
+        </div>
+
+        <div class="hidden md:flex items-center gap-5">
+            <a href="{{ url()->current() }}">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
+                alt="Logo PLN" 
+                class="h-16 w-16 md:h-18 md:w-18 object-contain" />
+            </a>
+            <a href="{{ url()->current() }}">
+            <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
+                alt="Logo HSSE" 
+                class="h-16 w-16 md:h-18 md:w-18 object-contain" />
+            </a>
+        </div>
         </div>
     </header>
 
