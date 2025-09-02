@@ -362,14 +362,14 @@
             </a>
 
             <div class="flex md:hidden gap-3">
+                <a href="{{ url()->current() }}">
+                    <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
+                        alt="Logo HSSE" 
+                        class="h-16 w-16 md:h-18 md:w-18 object-contain" />
+                    </a>
             <a href="{{ url()->current() }}">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
                     alt="Logo PLN" 
-                    class="h-12 w-12 object-contain" />
-            </a>
-            <a href="{{ url()->current() }}">
-                <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
-                    alt="Logo HSSE" 
                     class="h-12 w-12 object-contain" />
             </a>
             </div>
@@ -396,13 +396,13 @@
 
         <div class="hidden md:flex items-center gap-5">
             <a href="{{ url()->current() }}">
+                <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
+                    alt="Logo HSSE" 
+                    class="h-16 w-16 md:h-18 md:w-18 object-contain" />
+                </a>
+            <a href="{{ url()->current() }}">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
                 alt="Logo PLN" 
-                class="h-16 w-16 md:h-18 md:w-18 object-contain" />
-            </a>
-            <a href="{{ url()->current() }}">
-            <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
-                alt="Logo HSSE" 
                 class="h-16 w-16 md:h-18 md:w-18 object-contain" />
             </a>
         </div>
