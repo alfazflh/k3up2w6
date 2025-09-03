@@ -87,7 +87,7 @@
                 ['label' => 'Box Hydrant', 'route' => 'boxhydrant.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
                 ['label' => 'Rumah Pompa', 'route' => 'rumah_pompa.index', 'icon' => 'https://png.pngtree.com/png-vector/20250523/ourmid/pngtree-fire-hydrant-sign-red-vector-png-image_16363373.png'],
                 ['label' => 'Kotak P3K', 'route' => 'p3k.index', 'icon' => 'https://ik.imagekit.io/pln/pngwing.com.png'],
-                ['label' => 'IKA', 'route' => 'inspeksi.dokumen.hasil', 'icon' => 'https://ik.imagekit.io/pln/audit.png'],
+                ['label' => 'IK', 'route' => 'inspeksi.dokumen.hasil', 'icon' => 'https://ik.imagekit.io/pln/audit.png'],
             ];
         
             // Kritik & Saran (selalu ada, tapi rute tergantung role)
