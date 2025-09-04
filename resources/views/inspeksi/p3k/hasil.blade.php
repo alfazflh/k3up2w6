@@ -756,7 +756,7 @@ margin-top: 0;
 
     <!-- Add New Button -->
     <a href="{{ route('p3k.inspeksi', ['id_p3k' => $id_p3k]) }}"
-        class="fixed bottom-6 right-6 bg-primary hover:bg-primary-dark text-white rounded-full px-6 py-3 shadow-lg transition transform hover:scale-105">
+        class="fixed bottom-4 right-4 bg-gray-200 hover:bg-gray-300 text-primary rounded-full p-2 shadow-lg sm:p-3">
           + Tambah Pemeriksaan
     </a>
 
