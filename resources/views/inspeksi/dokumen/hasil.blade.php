@@ -23,19 +23,19 @@
         <div class="relative flex items-center justify-between">
 
         <div class="flex items-center gap-4">
-            <a href="{{ url()->current() }}">
+            <a href="{{ route('welcome') }}" class="relative z-10">
             <img src="https://www.danantaraindonesia.com/images/v3/danantara-logo-black-v3.png" 
                 alt="Logo Danantara" 
                 class="h-14 w-32 md:h-14 md:w-38 object-contain" />
             </a>
 
             <div class="flex md:hidden gap-3">
-                <a href="{{ url()->current() }}">
+                <a href="{{ route('welcome') }}" class="relative z-10">
                     <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
                         alt="Logo HSSE" 
                         class="h-12 w-12 object-contain" />
                 </a>
-            <a href="{{ url()->current() }}">
+                <a href="{{ route('welcome') }}" class="relative z-10">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
                     alt="Logo PLN" 
                     class="h-12 w-12 object-contain" />
@@ -48,7 +48,7 @@
             DOKUMEN IK
             </h1>
             <h2 class="text-xs sm:text-sm text-white font-semibold">
-            PLN PUSHARLIS UP2WVI
+            PLN PUSHARLIS UP2W VI
             </h2>
         </div>
 
@@ -58,17 +58,17 @@
                 DOKUMEN IK
             </h1>
             <h2 class="text-sm sm:text-base md:text-xl text-white font-semibold mt-1">
-            PLN PUSHARLIS UP2WVI
+            PLN PUSHARLIS UP2W VI
             </h2>
         </div>
 
         <div class="hidden md:flex items-center gap-5">
-            <a href="{{ url()->current() }}">
+            <a href="{{ route('welcome') }}" class="relative z-10">
                 <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
                     alt="Logo HSSE" 
                     class="h-16 w-16 md:h-18 md:w-18 object-contain" />
                 </a>
-            <a href="{{ url()->current() }}">
+            <a href="{{ route('welcome') }}" class="relative z-10">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
                 alt="Logo PLN" 
                 class="h-16 w-16 md:h-18 md:w-18 object-contain" />
