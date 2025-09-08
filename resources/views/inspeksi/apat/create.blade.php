@@ -166,23 +166,41 @@
 
 <script>
     document.getElementById('submit-btn').addEventListener('click', function (e) {
+        e.preventDefault(); // cegah submit default biar bisa kasih loading dulu
+    
         const form = document.getElementById('form-inspeksi');
         const idApat = document.querySelector('input[name="id_apat"]').value;
-
+    
+        // 1. Tampilkan loading
         Swal.fire({
-            icon: 'success',
-            title: 'Pemeriksaan berhasil dikirim!',
-            showConfirmButton: false,
-            timer: 1500
+            title: 'Mengirim data...',
+            text: 'Harap tunggu sebentar',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
         });
-
-        form.submit();
-
+    
+        // 2. Submit form setelah delay singkat
         setTimeout(() => {
-            window.location.href = `/inspeksi/apat/${id_apat}/hasil`;
-        }, 1600);
+            form.submit();
+    
+            // 3. Setelah submit, ganti alert jadi sukses
+            Swal.fire({
+                icon: 'success',
+                title: 'Pemeriksaan berhasil dikirim!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+    
+            // 4. Redirect manual
+            setTimeout(() => {
+                window.location.href = `/inspeksi/apat/${idApat}/hasil`;
+            }, 1600);
+        }, 800); // kasih jeda biar loading keliatan
     });
-</script>
+    </script>
+    
 
 </body>
 </html>

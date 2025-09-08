@@ -188,24 +188,57 @@
 </script>
 
 <script>
-    document.getElementById('submit-btn').addEventListener('click', function () {
-      const form = document.getElementById('form-inspeksi');
-  
-      const idApar = document.querySelector('input[name="id_apar"]').value;
-  
-      Swal.fire({
-        icon: 'success',
-        title: 'Pemeriksaan berhasil dikirim!',
-        showConfirmButton: false,
-        timer: 1500
-      });
-  
-      form.submit();
-  
-      setTimeout(() => {
-        window.location.href = `/apar/${idApar}/hasil`;
-      }, 1600);
+document.getElementById('submit-btn').addEventListener('click', function () {
+  const form = document.getElementById('form-inspeksi');
+  const idApar = document.querySelector('input[name="id_apar"]').value;
+
+  // buat FormData dari form
+  const formData = new FormData(form);
+
+  // 1. Tampilkan loading
+  Swal.fire({
+    title: 'Mengirim data...',
+    text: 'Harap tunggu sebentar',
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading();
+    }
+  });
+
+  // 2. Kirim data ke server
+  fetch(form.action, {
+    method: form.method,
+    body: formData
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Gagal menyimpan data!");
+    }
+    return response.text(); // bisa juga json tergantung respon
+  })
+  .then(() => {
+    // 3. Kalau sukses
+    Swal.fire({
+      icon: 'success',
+      title: 'Pemeriksaan berhasil dikirim!',
+      showConfirmButton: false,
+      timer: 1500
     });
+
+    setTimeout(() => {
+      window.location.href = `/apar/${idApar}/hasil`;
+    }, 1600);
+  })
+  .catch(error => {
+    // 4. Kalau gagal
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: error.message,
+      confirmButtonColor: '#d33'
+    });
+  });
+});
   </script>
 
 

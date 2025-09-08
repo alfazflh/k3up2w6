@@ -53,7 +53,10 @@ public function hasil($id_firealarm)
 {
     $firealarm = FireAlarm::where('id_firealarm', $id_firealarm)->firstOrFail(); // pasti ada, kalau gak 404
 
-    $pemeriksaans = \App\Models\PemeriksaanFireAlarm::where('id_firealarm', $id_firealarm)->get();
+    $pemeriksaans = \App\Models\PemeriksaanFireAlarm::where('id_firealarm', $id_firealarm)
+    ->orderBy('tanggal_pemeriksaan', 'desc') // urutkan dari terbaru ke terlama
+    ->get();
+
 
     return view('inspeksi.fire_alarm.hasil', compact('pemeriksaans', 'firealarm'));
 }

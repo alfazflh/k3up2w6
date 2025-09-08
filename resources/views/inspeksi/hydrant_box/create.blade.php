@@ -162,10 +162,33 @@
     window.addEventListener('load', setBodyPadding);
     window.addEventListener('resize', setBodyPadding);
 
-    document.getElementById('submit-btn').addEventListener('click', function () {
-        const form = document.getElementById('form-inspeksi');
-        const idBox = document.querySelector('input[name="id_boxhydrant"]').value;
+document.getElementById('submit-btn').addEventListener('click', function (e) {
+    e.preventDefault();
+    const form = document.getElementById('form-inspeksi');
+    const idBox = document.querySelector('input[name="id_boxhydrant"]').value;
+    const formData = new FormData(form);
 
+    // 1. Tampilkan loading
+    Swal.fire({
+        title: 'Mengirim pemeriksaan...',
+        text: 'Harap tunggu sebentar',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // 2. Kirim form ke server
+    fetch(form.action, {
+        method: form.method,
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Gagal mengirim data!");
+        return response.text();
+    })
+    .then(() => {
+        // 3. Jika berhasil
         Swal.fire({
             icon: 'success',
             title: 'Pemeriksaan berhasil dikirim!',
@@ -173,12 +196,21 @@
             timer: 1500
         });
 
-        form.submit();
-
+        // 4. Redirect setelah notifikasi
         setTimeout(() => {
-            window.location.href = `/inspeksi/boxhydrant/${idBox}/hasil`;
+            window.location.href = `/inspeksi/hydrant-box/${idBox}/hasil`;
         }, 1600);
+    })
+    .catch(error => {
+        // 5. Jika gagal
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.message,
+            confirmButtonColor: '#d33'
+        });
     });
+});
 </script>
 
 </body>

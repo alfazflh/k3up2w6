@@ -130,19 +130,55 @@
         document.getElementById('form-dokumen').addEventListener('submit', function (e) {
             e.preventDefault();
             const form = this;
-
+            const formData = new FormData(form);
+        
+            // 1. Tampilkan loading
             Swal.fire({
-                icon: 'success',
-                title: 'Dokumen berhasil disimpan!',
-                showConfirmButton: false,
-                timer: 1500
+                title: 'Menyimpan dokumen...',
+                text: 'Harap tunggu sebentar',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
-
-            setTimeout(() => {
-                form.submit();
-            }, 1600);
+        
+            // 2. Kirim data ke server
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Gagal menyimpan dokumen!");
+                }
+                return response.text(); // kalau server balas JSON bisa pakai .json()
+            })
+            .then(() => {
+                // 3. Kalau sukses
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Dokumen berhasil disimpan!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+        
+                // 4. Redirect setelah delay 1.6 detik
+                setTimeout(() => {
+                    window.location.href = "/inspeksi/dokumen/hasil/"; // ganti sesuai tujuanmu
+                }, 1600);
+            })
+            .catch(error => {
+                // 5. Kalau gagal
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.message,
+                    confirmButtonColor: '#d33'
+                });
+            });
         });
-    </script>
+        </script>
+        
 
 </body>
 </html>

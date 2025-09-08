@@ -47,12 +47,15 @@ class HydrantBoxController extends Controller
     }
 
     public function hasil($id_boxhydrant)
-{
-    $boxhydrant = BoxHydrant::where('id_boxhydrant', $id_boxhydrant)->firstOrFail(); // pasti ada, kalau gak 404
-
-    $pemeriksaans = \App\Models\PemeriksaanBoxHydrant::where('id_boxhydrant', $id_boxhydrant)->get();
-
-    return view('inspeksi.hydrant_box.hasil', compact('pemeriksaans', 'boxhydrant'));
-}
+    {
+        $boxhydrant = BoxHydrant::where('id_boxhydrant', $id_boxhydrant)->firstOrFail(); 
+    
+        $pemeriksaans = \App\Models\PemeriksaanBoxHydrant::where('id_boxhydrant', $id_boxhydrant)
+            ->orderBy('tanggal_pemeriksaan', 'desc')
+            ->get();
+    
+        return view('inspeksi.hydrant_box.hasil', compact('pemeriksaans', 'boxhydrant'));
+    }
+    
 
 }
