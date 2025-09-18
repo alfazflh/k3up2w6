@@ -38,13 +38,17 @@ class ApatController extends Controller
         return view('inspeksi.apat.show', compact('apat')); // kirim ke view
     }
 
-    public function hasil($id_apat)
-    {
-        $pemeriksaans = \App\Models\PemeriksaanApat::where('id_apat', $id_apat)->get();
-        $apat = \App\Models\Apat::where('id_apat', $id_apat)->first();
-    
-        return view('inspeksi.apat.hasil', compact('pemeriksaans', 'id_apat', 'apat'));
-    }
+public function hasil($id_apat)
+{
+    $pemeriksaans = \App\Models\PemeriksaanApat::where('id_apat', $id_apat)
+        ->orderBy('tanggal_pemeriksaan', 'desc') // urutkan terbaru dulu
+        ->get();
+
+    $apat = \App\Models\Apat::where('id_apat', $id_apat)->first();
+
+    return view('inspeksi.apat.hasil', compact('pemeriksaans', 'id_apat', 'apat'));
+}
+
     
     
 
