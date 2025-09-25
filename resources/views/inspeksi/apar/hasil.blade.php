@@ -470,9 +470,9 @@
                                         <!-- Icon Kesimpulan -->
                                         <div class="flex items-center">
                                             @if(strtolower($data['kesimpulan'] ?? '') === 'baik')
-                                                <span class="text-green-500 text-lg relative top-0.5">✅</span>
+                                                <span class="text-green-500 text-lg relative top-1">✅</span>
                                             @else
-                                                <span class="text-red-500 text-lg relative top-0.10">❌</span>
+                                                <span class="text-red-500 text-lg relative top-1">❌</span>
                                             @endif
                                         </div>                                        
             
