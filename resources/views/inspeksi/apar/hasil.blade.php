@@ -466,7 +466,16 @@
                                 @endphp
                                 
                                     <div class="flex flex-wrap justify-center gap-2">
-                                        
+                                        <td class="checkbox-group">
+                                            <label class="option">
+                                            <span class="checkbox ${ (data.kesimpulan || '').toLowerCase() === 'baik' ? 'checked baik' : '' }"></span>
+                                            Baik
+                                        </label>
+                                        <label class="option">
+                                        <span class="checkbox ${ (data.kesimpulan || '').toLowerCase() === 'tidak baik' ? 'checked tidak-baik' : '' }"></span>
+                                        Tidak Baik
+                                        </label>
+                                        </td>
                                         <!-- Detail -->
                                         <button
                                             onclick='showDetail(@json($data))'
