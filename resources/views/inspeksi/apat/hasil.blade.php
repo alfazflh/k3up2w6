@@ -460,9 +460,9 @@
     <!-- Icon Kesimpulan -->
     <div class="flex items-center">
         @if(strtolower($data['kesimpulan'] ?? '') === 'baik')
-            <span class="text-green-500 text-lg relative top-1">✅</span>
+            <span class="text-green-500 text-lg relative top-[3px]">✅</span>
         @else
-            <span class="text-red-500 text-lg relative top-1">❌</span>
+            <span class="text-red-500 text-lg relative top-[3px]">❌</span>
         @endif
     </div>                                                                               
                                         <button onclick='showDetail(@json($data))'
