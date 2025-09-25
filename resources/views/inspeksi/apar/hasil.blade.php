@@ -442,63 +442,63 @@
                                     APAR {{ $pemeriksaan->id_apar }} Bulan
                                     {{ \Carbon\Carbon::parse($pemeriksaan->tanggal_pemeriksaan)->translatedFormat('F Y') }}
                                 </td>
-                                <td class="px-4 py-3 text-center space-x-2">
-                                    <!-- Detail -->
+            
+                                <td class="px-4 py-3 text-center">
                                     @php
-                                    $data = [
-                                        'id_apar' => $pemeriksaan->id_apar,
-                                        'tanggal' => \Carbon\Carbon::parse($pemeriksaan->tanggal_pemeriksaan)->locale('id')->translatedFormat('d F Y'),
-                                        'lokasi' => $pemeriksaan->lokasi,
-                                        'isi_apar' => $pemeriksaan->isi_apar,
-                                        'kapasitas' => $pemeriksaan->kapasitas,
-                                        'masa_berlaku' => \Carbon\Carbon::parse($pemeriksaan->masa_berlaku)->translatedFormat('F Y'),
-                                        'pressure_gauge' => $pemeriksaan->pressure_gauge,
-                                        'segel' => $pemeriksaan->segel,
-                                        'selang' => $pemeriksaan->selang,
-                                        'klem_selang' => $pemeriksaan->klem_selang,
-                                        'handle' => $pemeriksaan->handle,
-                                        'petugas' => $pemeriksaan->petugas,
-                                        'pengawas' => $pemeriksaan->pengawas,
-                                        'catatan' => $pemeriksaan->catatan,
-                                        'kondisi_fisik' => $pemeriksaan->kondisi_fisik,
-                                        'kesimpulan' => $pemeriksaan->kesimpulan,
-                                    ];
-                                @endphp
-                                
-                                    <div class="flex flex-wrap justify-center gap-2">
-                                        
+                                        $data = [
+                                            'id_apar' => $pemeriksaan->id_apar,
+                                            'tanggal' => \Carbon\Carbon::parse($pemeriksaan->tanggal_pemeriksaan)->locale('id')->translatedFormat('d F Y'),
+                                            'lokasi' => $pemeriksaan->lokasi,
+                                            'isi_apar' => $pemeriksaan->isi_apar,
+                                            'kapasitas' => $pemeriksaan->kapasitas,
+                                            'masa_berlaku' => \Carbon\Carbon::parse($pemeriksaan->masa_berlaku)->translatedFormat('F Y'),
+                                            'pressure_gauge' => $pemeriksaan->pressure_gauge,
+                                            'segel' => $pemeriksaan->segel,
+                                            'selang' => $pemeriksaan->selang,
+                                            'klem_selang' => $pemeriksaan->klem_selang,
+                                            'handle' => $pemeriksaan->handle,
+                                            'petugas' => $pemeriksaan->petugas,
+                                            'pengawas' => $pemeriksaan->pengawas,
+                                            'catatan' => $pemeriksaan->catatan,
+                                            'kondisi_fisik' => $pemeriksaan->kondisi_fisik,
+                                            'kesimpulan' => $pemeriksaan->kesimpulan,
+                                        ];
+                                    @endphp
+            
+                                    <!-- FLEX WRAPPER -->
+                                    <div class="flex flex-wrap justify-center items-center gap-2">
+                                        <!-- Icon Kesimpulan -->
+                                        <div class="flex items-center">
+                                            @if(strtolower($data['kesimpulan'] ?? '') === 'baik')
+                                                <span class="text-green-500 text-lg relative top-0.5">✅</span>
+                                            @else
+                                                <span class="text-red-500 text-lg relative top-0.10">❌</span>
+                                            @endif
+                                        </div>                                        
+            
                                         <!-- Detail -->
                                         <button
                                             onclick='showDetail(@json($data))'
                                             class="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded">
                                             Detail
                                         </button>
-                                
+            
                                         @auth
-                                        @if(Auth::user()->role === 'admin')
-                                            <!-- Edit -->
-                                            <button onclick="openEditModal({{ $pemeriksaan->id }})"
-                                                    class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded">
-                                                Edit
-                                            </button>
-                                    
-                                            <!-- Hapus -->
-                                            <button 
-                                            onclick="confirmDelete({{ $pemeriksaan->id }})"
-                                            class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">
-                                            Hapus
-                                        </button>
-                                        
-                                        <form id="delete-form-{{ $pemeriksaan->id }}" 
-                                            action="{{ route('pemeriksaan.destroy', $pemeriksaan->id) }}" 
-                                            method="POST" class="hidden">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                        
-                                        @endif
-                                    @endauth
-                                    
+                                            @if(Auth::user()->role === 'admin')
+                                                <!-- Edit -->
+                                                <button onclick="openEditModal({{ $pemeriksaan->id }})"
+                                                        class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded">
+                                                    Edit
+                                                </button>
+            
+                                                <!-- Hapus -->
+                                                <button 
+                                                    onclick="confirmDelete({{ $pemeriksaan->id }})"
+                                                    class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">
+                                                    Hapus
+                                                </button>
+                                            @endif
+                                        @endauth
                                     </div>
                                 </td>
                             </tr>
@@ -506,6 +506,7 @@
                     @endforeach
                 </tbody>
             </table>
+            
     
             @if($pemeriksaans->whereNotNull('tanggal_pemeriksaan')->count() === 0)
                 <div class="p-4 text-center text-gray-500">
