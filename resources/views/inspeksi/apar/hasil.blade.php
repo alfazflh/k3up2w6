@@ -466,6 +466,7 @@
                                 @endphp
                                 
                                     <div class="flex flex-wrap justify-center gap-2">
+                                        
                                         <!-- Detail -->
                                         <button
                                             onclick='showDetail(@json($data))'
