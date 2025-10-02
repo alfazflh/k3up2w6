@@ -32,10 +32,16 @@ Route::prefix('inspeksi')->group(function () {
     Route::controller(AparController::class)->prefix('apar')->group(function () {
         Route::get('/', 'index')->name('apar.index');
         Route::get('/{id_apar}', 'show')->name('apar.show');
-        Route::get('/{id_apar}/inspeksi', 'create')->name('apar.inspeksi');
+        
+        // WAJIB LOGIN
+        Route::get('/{id_apar}/inspeksi', 'create')
+            ->name('apar.inspeksi')
+            ->middleware('auth');
+        
         Route::get('/{id_apar}/hasil', 'hasil')->name('apar.hasil');
-        Route::post('/store', 'store')->name('apar.store');
+        Route::post('/store', 'store')->name('apar.store')->middleware('auth');
     });
+    
 
     Route::controller(ApatController::class)->prefix('apat')->group(function () {
         Route::get('/', 'index')->name('apat.index');
