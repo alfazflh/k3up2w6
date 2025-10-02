@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apar;
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanApar;
+use Illuminate\Support\Facades\Auth;
 
 
 class AparController extends Controller
@@ -18,10 +19,16 @@ class AparController extends Controller
 
     public function create($id_apar)
     {
+        $user = Auth::user();
+        if (!$user || !in_array($user->role, ['admin', 'superadmin'])) {
+            return redirect()->route('apar.hasil', ['id_apar' => $id_apar]);
+        }
+    
         $apar = Apar::where('id_apar', $id_apar)->firstOrFail();
     
         return view('inspeksi.apar.create', compact('apar'));
     }
+    
     
 
     public function show($id_apar)
