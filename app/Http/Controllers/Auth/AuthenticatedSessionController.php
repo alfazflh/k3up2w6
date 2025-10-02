@@ -25,13 +25,16 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
-
-        // Redirect ke halaman yang dituju sebelumnya,
-        // atau ke welcome kalau tidak ada intended URL.
+    
+        // 1. Kalau ada query ?redirect=... → pakai itu
+        if ($request->filled('redirect')) {
+            return redirect()->to($request->input('redirect'));
+        }
+    
+        // 2. Kalau ada intended (middleware auth simpan URL) → pakai itu
         return redirect()->intended(route('welcome'));
-    }
+    }       
 
     /**
      * Logout user.

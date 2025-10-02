@@ -38,6 +38,12 @@
                     <label for="remember_me" class="ml-2 text-sm text-gray-700">{{ __('Remember me') }}</label>
                 </div>
 
+                <!-- Redirect Hidden -->
+                @if(request()->has('redirect'))
+                <input type="hidden" name="redirect" value="{{ request()->input('redirect') }}">
+                @endif
+
+
                 <!-- Submit -->
                 <div>
                     <x-primary-button class="w-full bg-[#196275] hover:bg-[#104855] text-white font-semibold py-3 rounded-xl shadow-md transition duration-300 flex items-center justify-center">
