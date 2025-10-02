@@ -658,7 +658,7 @@
     <a href="{{ route('login', ['redirect' => url()->full()]) }}"
         class="fixed bottom-4 right-4 bg-gray-200 hover:bg-gray-300 text-primary 
                rounded-full px-5 py-2 shadow-lg z-50 
-               sm:px-6 sm:py-3 sm:text-lg font-semibold transition">
+               sm:px-6 sm:py-3 sm:text-lg transition">
         Login
     </a>
 @endauth
