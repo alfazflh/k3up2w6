@@ -110,7 +110,7 @@
                                         Lihat Dokumen
                                     </a>
                             
-                                    @if(Auth::check() && Auth::user()->role === 'admin')
+                                    @if(Auth::check() && Auth::user()->role === 'superadmin')
                                         <button type="button" onclick="openModal({{ $item->id }}, '{{ $item->nama_dokumen }}')"
                                             class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded">
                                             Edit
