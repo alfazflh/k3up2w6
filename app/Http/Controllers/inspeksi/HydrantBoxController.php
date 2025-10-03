@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BoxHydrant;
 use App\Models\PemeriksaanBoxHydrant;
+use Illuminate\Support\Facades\Auth;
 
 class HydrantBoxController extends Controller
 {
@@ -17,6 +18,11 @@ class HydrantBoxController extends Controller
 
     public function create($id_boxhydrant)
     {
+        $user = Auth::user();
+        if (!$user || !in_array($user->role, ['admin', 'superadmin'])) {
+            return redirect()->route('hydrant_box.hasil', ['id_boxhydrant' => $id_boxhydrant]);
+        }
+
         $boxhydrant = BoxHydrant::where('id_boxhydrant', $id_boxhydrant)->firstOrFail();
         return view('inspeksi.hydrant_box.create', compact('boxhydrant'));
     }
