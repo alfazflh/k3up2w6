@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Inspeksi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\P3k;
+use Illuminate\Support\Facades\Auth;
 
 class P3kController extends Controller
 {
@@ -75,6 +76,11 @@ return view('inspeksi.p3k.hasilpemakaian', [
 
     public function create($id_p3k)
     {
+        $user = Auth::user();
+        if (!$user || !in_array($user->role, ['admin', 'superadmin'])) {
+            return redirect()->route('p3k.hasil', ['id_p3k' => $id_p3k]);
+        }
+
         return view('inspeksi.p3k.create', compact('id_p3k'));
     }
 
