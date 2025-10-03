@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Inspeksi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FireAlarm; 
+use Illuminate\Support\Facades\Auth;
 
 class FireAlarmController extends Controller
 {
@@ -16,6 +17,11 @@ class FireAlarmController extends Controller
 
     public function create($id_firealarm)
     {
+        $user = Auth::user();
+        if (!$user || !in_array($user->role, ['admin', 'superadmin'])) {
+            return redirect()->route('fire_alarm.hasil', ['id_firealarm' => $id_firealarm]);
+        }
+
         $firealarm = FireAlarm::where('id_firealarm', $id_firealarm)->firstOrFail();
         return view('inspeksi.fire_alarm.create', compact('firealarm'));
     }
