@@ -478,7 +478,7 @@
                                     </button>
 
                                     @auth
-                                    @if(Auth::user()->role === 'admin')
+                                    @if(Auth::user()->role === 'superadmin')
                                         {{-- Edit Sequential Button untuk data dengan nama valid --}}
                                         <button onclick="openEditSequentialModal('{{ $firstItem->id_p3k }}', '{{ $monthYear }}')"
                                                 class="hidden bg-green-500 hover:bg-green-600 text-white text-xs px-3 py-1 rounded">
