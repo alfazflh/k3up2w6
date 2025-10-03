@@ -471,7 +471,7 @@
                                         </button>
 
                                         @auth
-                                            @if(Auth::user()->role === 'admin')
+                                            @if(Auth::user()->role === 'superadmin')
                                             <button onclick="openEditModal({{ $pemeriksaan->id }})"
                                                     class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded">
                                                 Edit
