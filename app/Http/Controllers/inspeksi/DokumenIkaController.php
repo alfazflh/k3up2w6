@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Inspeksi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DokumenIka;
+use Illuminate\Support\Facades\Auth;
 
 class DokumenIkaController extends Controller
 {
@@ -16,6 +17,11 @@ class DokumenIkaController extends Controller
 
     public function create()
     {
+        $user = Auth::user();
+        if (!$user || !in_array($user->role, ['admin', 'superadmin'])) {
+            return redirect()->route('inspeksi.dokumen.hasil');
+        }
+
         return view('inspeksi.dokumen.create');
     }
 
