@@ -166,10 +166,13 @@
         </div>
     </div>
 
-    <!-- Tambah Dokumen -->
+    @auth
+    @if(in_array(Auth::user()->role, ['superadmin', 'admin']))
     <a href="{{ route('inspeksi.dokumen.create') }}" class="fixed bottom-4 right-4 bg-gray-200 hover:bg-gray-300 text-primary rounded-full p-3 shadow-lg">
         + Tambah Dokumen
     </a>
+    @endif
+    @endauth
 
     @if(session('success'))
     <script>
