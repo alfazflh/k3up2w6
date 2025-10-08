@@ -69,9 +69,10 @@ public function editForm($id)
 {
     $p = PemeriksaanApar::findOrFail($id);
 
-    // data lama
+    // opsi umum
     $segelOptions = ['baik', 'tidak_baik'];
     $options = ['baik', 'tidak_baik'];
+    $pressureGaugeOptions = ['hijau', 'merah', 'tidak tersedia'];
 
     return response()->json([
         'html' => '
@@ -106,14 +107,22 @@ public function editForm($id)
                 'handle' => 'Handle',
                 'kondisi_fisik' => 'Kondisi Fisik',
                 'kesimpulan' => 'Kesimpulan'
-            ])->map(function($label, $field) use ($p, $options, $segelOptions) {
+            ])->map(function($label, $field) use ($p, $options, $segelOptions, $pressureGaugeOptions) {
                 $current = strtolower(str_replace(' ', '_', $p->$field));
                 $radios = '';
 
-                $values = $field === 'segel' ? $segelOptions : $options;
+                // tentukan opsi berdasarkan field
+                if ($field === 'pressure_gauge') {
+                    $values = $pressureGaugeOptions;
+                } elseif ($field === 'segel') {
+                    $values = $segelOptions;
+                } else {
+                    $values = $options;
+                }
 
+                // buat elemen radio
                 foreach ($values as $val) {
-                    $checked = $current === $val ? 'checked' : '';
+                    $checked = $current === strtolower(str_replace(' ', '_', $val)) ? 'checked' : '';
                     $labelVal = ucfirst(str_replace('_', ' ', $val));
                     $radios .= '
                         <label class="inline-flex items-center space-x-2">
@@ -131,9 +140,9 @@ public function editForm($id)
             })->implode('') . '
 
             <div>
-            <label class="block font-semibold mb-1">Catatan</label>
-            <input type="text" name="catatan" value="'.$p->catatan.'" class="w-full border px-3 py-2 rounded-lg" required>
-        </div>
+                <label class="block font-semibold mb-1">Catatan</label>
+                <input type="text" name="catatan" value="'.$p->catatan.'" class="w-full border px-3 py-2 rounded-lg" required>
+            </div>
 
             <div class="flex justify-end">
                 <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700">Simpan</button>
@@ -141,6 +150,7 @@ public function editForm($id)
         </form>'
     ]);
 }
+
 
 
 public function update(Request $request, $id)

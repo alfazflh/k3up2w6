@@ -134,16 +134,19 @@
                         'kesimpulan' => 'Kesimpulan',
                     ];
                 @endphp
-    
+            
                 @foreach ($items as $key => $label)
                     <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <label class="block font-semibold mb-2">{{ $label }} <span class="text-red-500">*</span></label>
+                        <label class="block font-semibold mb-2">
+                            {{ $label }} <span class="text-red-500">*</span>
+                        </label>
+            
                         <div class="flex flex-wrap gap-4">
-                            @if ($key === 'segel')
-                                @foreach (['baik', 'tidak_baik'] as $val)
+                            @if ($key === 'pressure_gauge')
+                                @foreach (['hijau', 'merah', 'tidak tersedia'] as $val)
                                     <label class="inline-flex items-center space-x-1">
                                         <input type="radio" name="{{ $key }}" value="{{ $val }}" required>
-                                        <span>{{ ucfirst(str_replace('_', ' ', $val)) }}</span>
+                                        <span>{{ ucfirst($val) }}</span>
                                     </label>
                                 @endforeach
                             @else
@@ -157,7 +160,7 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
+            </div>            
     
             <div class="text-center">
                 <button type="submit" id="submit-btn"

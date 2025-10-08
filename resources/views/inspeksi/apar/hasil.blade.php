@@ -351,6 +351,36 @@
     transform: translate(-50%, -50%);
 }
 
+.checkbox.tidak-tersedia::after {
+    content: "X";
+    font-size: 10px;
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.checkbox.hijau::after {
+    content: "✓";
+    font-size: 10px;
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.checkbox.merah::after {
+    content: "✓";
+    font-size: 10px;
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
     </style>
 </head>
@@ -716,12 +746,16 @@ function showDetail(data) {
     <td>Pressure Gauge</td>
     <td class="checkbox-group">
         <label class="option">
-            <span class="checkbox ${ (data.pressure_gauge || '').toLowerCase() === 'baik' ? 'checked baik' : '' }"></span>
-            Baik
+            <span class="checkbox ${ (data.pressure_gauge || '').toLowerCase() === 'hijau' ? 'checked hijau' : '' }"></span>
+            Hijau
         </label>
         <label class="option">
-            <span class="checkbox ${ (data.pressure_gauge || '').toLowerCase() === 'tidak baik' ? 'checked tidak-baik' : '' }"></span>
-            Tidak Baik
+            <span class="checkbox ${ (data.pressure_gauge || '').toLowerCase() === 'merah' ? 'checked merah' : '' }"></span>
+            Merah
+        </label>
+        <label class="option">
+            <span class="checkbox ${ (data.pressure_gauge || '').toLowerCase() === 'tidak tersedia' ? 'checked tidak-tersedia' : '' }"></span>
+            Tidak Tersedia
         </label>
     </td>
 </tr>
