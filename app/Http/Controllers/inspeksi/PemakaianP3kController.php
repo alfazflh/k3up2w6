@@ -482,7 +482,8 @@ class PemakaianP3kController extends Controller
 
         return view('inspeksi.p3k.stok', [
             'title' => 'Stok P3K ' . $id_p3k,
-            'data' => $data
+            'data' => $data,
+            'id_p3k' => $id_p3k
         ]);
     } catch (\Exception $e) {
         return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
