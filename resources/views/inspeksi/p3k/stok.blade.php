@@ -83,42 +83,45 @@
             </a>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 mt-6 mb-10">
+            <div class="max-w-7xl mx-auto px-4 mt-6 mb-10">
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
-                        <h2 class="text-2xl font-semibold text-[#196275]">Monitoring Stok P3K</h2>
-
-                        <form method="GET" class="flex items-center">
-                            @php
-                                $tahunSekarang = date('Y');
-                                $tahunDipilih = request('tahun', $tahunSekarang);
-                            @endphp
-                
-                            <select name="tahun" onchange="this.form.submit()" 
-                                class="border border-gray-300 rounded-md px-3 py-2 text-sm bg-white shadow-sm focus:ring-2 focus:ring-[#196275] focus:outline-none">
-                                @foreach(range($tahunSekarang - 2, $tahunSekarang + 1) as $t)
-                                    <option value="{{ $t }}" {{ $tahunDipilih == $t ? 'selected' : '' }}>
-                                        Tahun {{ $t }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </form>
+            
+                <!-- Header: Judul + Filter Tahun -->
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
+                    <h2 class="text-2xl font-semibold text-[#196275]">Monitoring Stok P3K</h2>
+            
+                    <!-- Filter Tahun -->
+                    <form method="GET" class="flex items-center">
+                    @php
+                        $tahunSekarang = date('Y');
+                        $tahunDipilih = request('tahun', $tahunSekarang);
+                    @endphp
+                    <select name="tahun" onchange="this.form.submit()"
+                        class="border border-gray-300 rounded-lg px-4 py-2 text-sm font-medium bg-white shadow-md focus:ring-2 focus:ring-[#196275] focus:outline-none transition duration-150 hover:border-[#196275] cursor-pointer">
+                        @foreach(range($tahunSekarang - 2, $tahunSekarang + 1) as $t)
+                        <option value="{{ $t }}" {{ $tahunDipilih == $t ? 'selected' : '' }}>
+                            Tahun {{ $t }}
+                        </option>
+                        @endforeach
+                    </select>
+                    </form>
+                </div>
+            
+                <!-- Legend -->
+                <div class="flex flex-wrap items-center justify-start sm:justify-between gap-4 sm:gap-6 border-t border-gray-200 pt-4 pb-4 text-xs sm:text-sm text-gray-700">
+                    <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-green-100 border border-green-400 rounded-sm shadow-sm"></div>
+                    <span>Stok Aman (> 70%)</span>
                     </div>
-
-                    <div class="flex flex-wrap gap-4 sm:gap-6 text-xs sm:text-sm text-gray-700 justify-start sm:justify-between border-t border-gray-200 pt-4">
-                        <div class="flex items-center gap-2">
-                            <div class="w-4 h-4 bg-green-100 border border-green-400 rounded-sm shadow-sm"></div>
-                            <span>Stok Aman (> 70%)</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-4 h-4 bg-yellow-100 border border-yellow-400 rounded-sm shadow-sm"></div>
-                            <span>Stok Rendah (30–70%)</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-4 h-4 bg-red-100 border border-red-400 rounded-sm shadow-sm"></div>
-                            <span>Stok Kritis (< 30%)</span>
-                        </div>
-                    </div>              
+                    <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-yellow-100 border border-yellow-400 rounded-sm shadow-sm"></div>
+                    <span>Stok Rendah (30–70%)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-red-100 border border-red-400 rounded-sm shadow-sm"></div>
+                    <span>Stok Kritis (< 30%)</span>
+                    </div>
+                </div>
             
                 <!-- Table Container -->
                 <div class="overflow-x-auto rounded-xl border border-gray-300">
@@ -136,7 +139,7 @@
                         </tr>
                         <tr class="bg-[#198f91] text-white text-center">
                         @foreach(['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'] as $bulan)
-                        <th class="py-1 px-2 border border-gray-300">{{ $bulan }}</th>
+                            <th class="py-1 px-2 border border-gray-300">{{ $bulan }}</th>
                         @endforeach
                         </tr>
                     </thead>
@@ -144,46 +147,45 @@
                     <tbody class="divide-y divide-gray-200">
                         @foreach($stokData as $index => $item)
                         @php
-                        $persenStok = ($item['stok_akhir'] / $item['standar']) * 100;
-                        $yangHarusDiadakan = max(0, $item['standar'] - $item['stok_akhir']);
-            
-                        if ($item['stok_akhir'] <= 0) {
-                            $stokClass = 'bg-red-100 text-red-700';
-                        } elseif ($persenStok < 30) {
-                            $stokClass = 'bg-red-100 text-red-700';
-                        } elseif ($persenStok < 70) {
-                            $stokClass = 'bg-yellow-100 text-yellow-700';
-                        } else {
-                            $stokClass = 'bg-green-100 text-green-700';
-                        }
+                            $persenStok = ($item['stok_akhir'] / $item['standar']) * 100;
+                            $yangHarusDiadakan = max(0, $item['standar'] - $item['stok_akhir']);
+                            if ($item['stok_akhir'] <= 0) {
+                                $stokClass = 'bg-red-100 text-red-700';
+                            } elseif ($persenStok < 30) {
+                                $stokClass = 'bg-red-100 text-red-700';
+                            } elseif ($persenStok < 70) {
+                                $stokClass = 'bg-yellow-100 text-yellow-700';
+                            } else {
+                                $stokClass = 'bg-green-100 text-green-700';
+                            }
                         @endphp
             
                         <tr class="hover:bg-gray-50 transition-all duration-150">
-                        <td class="py-2 px-2 text-center border border-gray-200">{{ $index + 1 }}</td>
-                        <td class="py-2 px-3 text-left font-medium border border-gray-200">{{ $item['nama'] }}</td>
-                        <td class="py-2 px-2 border border-gray-200">{{ $item['standar'] }}</td>
-                        <td class="py-2 px-2 border border-gray-200">{{ $item['satuan'] }}</td>
+                            <td class="py-2 px-2 text-center border border-gray-200">{{ $index + 1 }}</td>
+                            <td class="py-2 px-3 text-left font-medium border border-gray-200">{{ $item['nama'] }}</td>
+                            <td class="py-2 px-2 border border-gray-200 text-center">{{ $item['standar'] }}</td>
+                            <td class="py-2 px-2 border border-gray-200 text-center">{{ $item['satuan'] }}</td>
             
-                        @for($bulan = 1; $bulan <= 12; $bulan++)
+                            @for($bulan = 1; $bulan <= 12; $bulan++)
                             <td class="py-2 px-2 border border-gray-200 text-center">
-                            {{ $item['pemakaian_per_bulan'][$bulan] > 0 ? $item['pemakaian_per_bulan'][$bulan] : '' }}
+                                {{ $item['pemakaian_per_bulan'][$bulan] > 0 ? $item['pemakaian_per_bulan'][$bulan] : '' }}
                             </td>
-                        @endfor
+                            @endfor
             
-                        <td class="py-2 px-2 font-semibold border border-gray-200 text-center {{ $stokClass }}">
+                            <td class="py-2 px-2 font-semibold border border-gray-200 text-center {{ $stokClass }}">
                             {{ $item['stok_akhir'] }}
-                        </td>
-                        <td class="py-2 px-2 border border-gray-200 text-center">{{ $item['minimal_stok'] }}</td>
-                        <td class="py-2 px-2 font-semibold border border-gray-200 text-center {{ $yangHarusDiadakan > 0 ? 'bg-red-100 text-red-700' : '' }}">
+                            </td>
+                            <td class="py-2 px-2 border border-gray-200 text-center">{{ $item['minimal_stok'] }}</td>
+                            <td class="py-2 px-2 font-semibold border border-gray-200 text-center {{ $yangHarusDiadakan > 0 ? 'bg-red-100 text-red-700' : '' }}">
                             {{ $yangHarusDiadakan > 0 ? $yangHarusDiadakan : '' }}
-                        </td>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
                     </table>
                 </div>
                 </div>
-            </div>
+            </div>          
 
     <script>
         function setBodyPadding() {
