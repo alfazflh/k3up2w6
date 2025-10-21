@@ -60,51 +60,80 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body id="main-body" class="bg-white text-gray-800">
 
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-primary border-b shadow px-4 py-3">
-        <div class="relative flex items-center justify-between max-w-7xl mx-auto">
-            <div class="flex items-center gap-4">
-                <img src="https://www.danantaraindonesia.com/images/v3/danantara-logo-black-v3.png" 
-                    alt="Logo Danantara" 
-                    class="h-14 w-32 md:h-14 md:w-38 object-contain" />
-            </div>
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-primary border-b shadow px-4 py-3">
+        <div class="relative flex items-center justify-between">
 
-            <div class="absolute inset-x-0 text-center">
-                <h1 class="font-bold text-white leading-tight text-xl md:text-2xl">
-                    STOK P3K {{ $id_p3k }}
-                </h1>
-                <h2 class="text-sm md:text-base text-white font-semibold mt-1">
-                    PLN PUSHARLIS UP2W VI
-                </h2>
-            </div>
+        <div class="flex items-center gap-4">
+            <a href="{{ route('welcome') }}" class="relative z-10">
+            <img src="https://www.danantaraindonesia.com/images/v3/danantara-logo-black-v3.png" 
+                alt="Logo Danantara" 
+                class="h-14 w-32 md:h-14 md:w-38 object-contain" />
+            </a>
 
-            <div class="flex items-center gap-3">
-                <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
-                    alt="Logo HSSE" 
-                    class="h-12 w-12 md:h-16 md:w-16 object-contain" />
+            <div class="flex md:hidden gap-3">
+            <a href="{{ route('welcome') }}" class="relative z-10">
+                    <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
+                        alt="Logo HSSE" 
+                        class="h-12 w-12 object-contain" />
+                </a>
+            <a href="{{ route('welcome') }}" class="relative z-10">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
                     alt="Logo PLN" 
-                    class="h-12 w-12 md:h-16 md:w-16 object-contain" />
+                    class="h-12 w-12 object-contain" />
+            </a>
             </div>
         </div>
+
+        <div class="flex flex-col text-center md:hidden">
+            <h1 class="font-bold text-white leading-tight text-sm sm:text-lg">
+            MONITORING P3K
+            </h1>
+            <h2 class="text-xs sm:text-sm text-white font-semibold">
+            PLN PUSHARLIS UP2W VI
+            </h2>
+        </div>
+
+        <div class="absolute inset-x-0 text-center hidden md:block">
+            <h1 class="font-bold text-white leading-tight"
+                style="font-size: clamp(1rem, 2vw + 0.5rem, 2rem);">
+                MONITORING P3K
+            </h1>
+            <h2 class="text-sm sm:text-base md:text-xl text-white font-semibold mt-1">
+            PLN PUSHARLIS UP2W VI
+            </h2>
+        </div>
+
+        <div class="hidden md:flex items-center gap-5">
+            <a href="{{ route('welcome') }}" class="relative z-10">
+                <img src="https://cdn-b.heylink.me/media/users/og_image/56edc2ef0edd4e75b3784913f6dac9e8.webp" 
+                    alt="Logo HSSE" 
+                    class="h-16 w-16 md:h-18 md:w-18 object-contain" />
+                </a>
+            <a href="{{ route('welcome') }}" class="relative z-10">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/960px-Logo_PLN.png" 
+                alt="Logo PLN" 
+                class="h-16 w-16 md:h-18 md:w-18 object-contain" />
+            </a>
+        </div>
+        </div>
     </header>
-
-    <div class="pt-32"></div>
-
-    <!-- Back Button -->
-    <div class="container-wrapper px-4 mt-6">
+    
+    <div id="spacer" class="pt-32"></div>
+    
+    <div class="fixed max-w-6xl mx-auto px-4 mt-6">
         <a href="{{ route('p3k.show', ['id_p3k' => $id_p3k]) }}"
-           class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-300">
-            ← Kembali
+           class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition">
+            ←
         </a>
     </div>
 
-    <!-- Tabel Stok -->
-    <div class="container-wrapper px-4 mt-6 mb-12">
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-4 mt-6">
+    <div class="container-wrapper mb-12">
         <div class="bg-white rounded-lg shadow-lg p-4 overflow-x-auto">
-            <h2 class="text-lg font-bold text-primary mb-4">Monitoring Stok P3K - Tahun {{ date('Y') }}</h2>
+            <h2 class="text-lg font-bold text-primary mb-4">Monitoring Stok P3K</h2>
             
             <!-- Legend -->
             <div class="flex gap-4 mb-4 text-xs">
@@ -194,6 +223,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
     </div>
 
 </body>
