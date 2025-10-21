@@ -130,8 +130,8 @@
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-6xl mx-auto px-4 mt-6">
-    <div class="container-wrapper mb-12">
+    <div class="max-w-6xl mx-auto px-4 mt-2">
+    <div class="container-wrapper">
         <div class="bg-white rounded-lg shadow-lg p-4 overflow-x-auto">
             <h2 class="text-lg font-bold text-primary mb-4">Monitoring Stok P3K</h2>
             
