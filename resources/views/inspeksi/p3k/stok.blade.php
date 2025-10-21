@@ -85,29 +85,31 @@
 
             <div class="max-w-7xl mx-auto px-4 mt-6 mb-10">
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-            
-                <!-- Header: Judul + Filter Tahun -->
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
                     <h2 class="text-2xl font-semibold text-[#196275]">Monitoring Stok P3K</h2>
-            
-                    <!-- Filter Tahun -->
-                    <form method="GET" class="flex items-center">
-                    @php
-                        $tahunSekarang = date('Y');
-                        $tahunDipilih = request('tahun', $tahunSekarang);
-                    @endphp
-                    <select name="tahun" onchange="this.form.submit()"
-                        class="border border-gray-300 rounded-lg px-4 py-2 text-sm font-medium bg-white shadow-md focus:ring-2 focus:ring-[#196275] focus:outline-none transition duration-150 hover:border-[#196275] cursor-pointer">
-                        @foreach(range($tahunSekarang - 2, $tahunSekarang + 1) as $t)
-                        <option value="{{ $t }}" {{ $tahunDipilih == $t ? 'selected' : '' }}>
-                            Tahun {{ $t }}
-                        </option>
-                        @endforeach
-                    </select>
-                    </form>
+                        <form method="GET" class="flex items-center">
+                            @php
+                                $tahunSekarang = date('Y');
+                                $tahunDipilih = request('tahun', $tahunSekarang);
+                            @endphp
+                        
+                            <div class="relative">
+                            <select name="tahun" onchange="this.form.submit()"
+                                class="appearance-none border border-gray-300 rounded-lg px-4 py-2 text-sm font-medium bg-white shadow-md focus:ring-2 focus:ring-[#196275] focus:outline-none transition duration-150 hover:border-[#196275] cursor-pointer pr-10">
+                                @foreach(range($tahunSekarang - 2, $tahunSekarang + 1) as $t)
+                                <option value="{{ $t }}" {{ $tahunDipilih == $t ? 'selected' : '' }}>
+                                    Tahun {{ $t }}
+                                </option>
+                                @endforeach
+                            </select>
+                            <svg class="w-4 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none" 
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                            </div>
+                        </form>                      
                 </div>
-            
-                <!-- Legend -->
+
                 <div class="flex flex-wrap items-center justify-start sm:justify-between gap-4 sm:gap-6 border-t border-gray-200 pt-4 pb-4 text-xs sm:text-sm text-gray-700">
                     <div class="flex items-center gap-2">
                     <div class="w-4 h-4 bg-green-100 border border-green-400 rounded-sm shadow-sm"></div>
@@ -122,8 +124,7 @@
                     <span>Stok Kritis (< 30%)</span>
                     </div>
                 </div>
-            
-                <!-- Table Container -->
+
                 <div class="overflow-x-auto rounded-xl border border-gray-300">
                     <table class="min-w-full text-[12px] sm:text-sm text-gray-700 border-collapse">
                     <thead>
