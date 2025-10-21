@@ -522,7 +522,7 @@ class PemakaianP3kController extends Controller
                 'satuan' => $itemInfo['satuan'],
                 'pemakaian_per_bulan' => [],
                 'stok_akhir' => $itemInfo['standar'], // Mulai dengan stok standar
-                'minimal_stok' => ceil($itemInfo['standar'] * 0.3), // 30% dari standar
+                'minimal_stok' => $itemInfo['standar'],                // 30% dari standar
             ];
     
             // Hitung pemakaian per bulan (Januari - Desember)
