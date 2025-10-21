@@ -193,38 +193,6 @@
                     @endforeach
                 </tbody>
             </table>
-
-            <!-- Summary -->
-            <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-                <h3 class="font-bold text-primary mb-3">Ringkasan Stok:</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                    <div class="bg-green-50 p-3 rounded border border-green-200">
-                        <p class="font-semibold text-green-800">Item Stok Aman</p>
-                        <p class="text-2xl font-bold text-green-600">
-                            {{ collect($stokData)->filter(function($item) {
-                                return ($item['stok_akhir'] / $item['standar']) >= 0.7;
-                            })->count() }}
-                        </p>
-                    </div>
-                    <div class="bg-yellow-50 p-3 rounded border border-yellow-200">
-                        <p class="font-semibold text-yellow-800">Item Stok Rendah</p>
-                        <p class="text-2xl font-bold text-yellow-600">
-                            {{ collect($stokData)->filter(function($item) {
-                                $persen = ($item['stok_akhir'] / $item['standar']);
-                                return $persen >= 0.3 && $persen < 0.7;
-                            })->count() }}
-                        </p>
-                    </div>
-                    <div class="bg-red-50 p-3 rounded border border-red-200">
-                        <p class="font-semibold text-red-800">Item Stok Kritis</p>
-                        <p class="text-2xl font-bold text-red-600">
-                            {{ collect($stokData)->filter(function($item) {
-                                return ($item['stok_akhir'] / $item['standar']) < 0.3 || $item['stok_akhir'] <= 0;
-                            })->count() }}
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
