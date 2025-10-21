@@ -96,7 +96,7 @@
                             <div class="relative">
                             <select name="tahun" onchange="this.form.submit()"
                                 class="appearance-none border border-gray-300 rounded-lg px-4 py-2 text-sm font-medium bg-white shadow-md focus:ring-2 focus:ring-[#196275] focus:outline-none transition duration-150 hover:border-[#196275] cursor-pointer pr-10">
-                                @foreach(range($tahunSekarang - 2, $tahunSekarang + 1) as $t)
+                                @foreach(range($tahunSekarang - 5, $tahunSekarang + 5) as $t)
                                 <option value="{{ $t }}" {{ $tahunDipilih == $t ? 'selected' : '' }}>
                                     Tahun {{ $t }}
                                 </option>
