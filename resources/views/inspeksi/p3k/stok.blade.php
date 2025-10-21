@@ -76,97 +76,93 @@
     
     <div id="spacer" class="pt-32"></div>
     
-    <div class="fixed max-w-6xl mx-auto px-4 mt-6">
-        <a href="{{ route('p3k.show', ['id_p3k' => $id_p3k]) }}"
-           class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition">
-            ←
-        </a>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 mt-8">
-        <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-          <h2 class="text-xl font-semibold text-[#196275] mb-5">Monitoring Stok P3K</h2>
-      
-          <!-- Legend -->
-          <div class="flex flex-wrap gap-4 mb-6 text-xs text-gray-700">
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 bg-green-100 border border-green-400 rounded-sm shadow-sm"></div>
-              <span>Stok Aman (&gt; 70%)</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 bg-yellow-100 border border-yellow-400 rounded-sm shadow-sm"></div>
-              <span>Stok Rendah (30–70%)</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 bg-red-100 border border-red-400 rounded-sm shadow-sm"></div>
-              <span>Stok Kritis (&lt; 30%)</span>
-            </div>
-          </div>
-      
-          <!-- Table Wrapper -->
-          <div class="overflow-x-auto rounded-lg border border-gray-200">
-            <table class="min-w-full text-[12px] text-gray-700 border-collapse">
-              <thead>
-                <tr class="bg-[#1f7389] text-white text-center">
-                  <th rowspan="2" class="py-2 px-3 border border-gray-300 w-[40px]">No</th>
-                  <th rowspan="2" class="py-2 px-3 border border-gray-300 min-w-[200px] text-left">Nama Barang</th>
-                  <th rowspan="2" class="py-2 px-3 border border-gray-300">Standar<br>Jumlah</th>
-                  <th rowspan="2" class="py-2 px-3 border border-gray-300">Satuan</th>
-                  <th colspan="12" class="bg-[#146b6e] border border-gray-300">Pemakaian Per Bulan</th>
-                  <th rowspan="2" class="py-2 px-3 border border-gray-300 bg-blue-500">Stok<br>Akhir</th>
-                  <th rowspan="2" class="py-2 px-3 border border-gray-300 bg-yellow-400">Minimal<br>Stok</th>
-                  <th rowspan="2" class="py-2 px-3 border border-gray-300 bg-amber-500">Yang Harus<br>Diadakan</th>
-                </tr>
-                <tr class="bg-[#198f91] text-white text-center">
-                  @foreach(['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'] as $bulan)
-                    <th class="py-1 px-2 border border-gray-300">{{ $bulan }}</th>
-                  @endforeach
-                </tr>
-              </thead>
-      
-              <tbody class="divide-y divide-gray-200">
-                @foreach($stokData as $index => $item)
-                  @php
-                    $persenStok = ($item['stok_akhir'] / $item['standar']) * 100;
-                    $yangHarusDiadakan = max(0, $item['standar'] - $item['stok_akhir']);
-      
-                    if ($item['stok_akhir'] <= 0) {
-                        $stokClass = 'bg-red-100 text-red-700';
-                    } elseif ($persenStok < 30) {
-                        $stokClass = 'bg-red-100 text-red-700';
-                    } elseif ($persenStok < 70) {
-                        $stokClass = 'bg-yellow-100 text-yellow-700';
-                    } else {
-                        $stokClass = 'bg-green-100 text-green-700';
-                    }
-                  @endphp
-      
-                  <tr class="hover:bg-gray-50 transition-all duration-200">
-                    <td class="py-2 px-2 text-center border border-gray-200">{{ $index + 1 }}</td>
-                    <td class="py-2 px-3 text-left font-medium border border-gray-200">{{ $item['nama'] }}</td>
-                    <td class="py-2 px-2 border border-gray-200">{{ $item['standar'] }}</td>
-                    <td class="py-2 px-2 border border-gray-200">{{ $item['satuan'] }}</td>
-      
-                    @for($bulan = 1; $bulan <= 12; $bulan++)
-                      <td class="py-2 px-2 border border-gray-200">
-                        {{ $item['pemakaian_per_bulan'][$bulan] > 0 ? $item['pemakaian_per_bulan'][$bulan] : '' }}
-                      </td>
-                    @endfor
-      
-                    <td class="py-2 px-2 font-semibold border border-gray-200 {{ $stokClass }}">
-                      {{ $item['stok_akhir'] }}
-                    </td>
-                    <td class="py-2 px-2 border border-gray-200">{{ $item['minimal_stok'] }}</td>
-                    <td class="py-2 px-2 font-semibold border border-gray-200 {{ $yangHarusDiadakan > 0 ? 'bg-red-100 text-red-700' : '' }}">
-                      {{ $yangHarusDiadakan > 0 ? $yangHarusDiadakan : '' }}
-                    </td>
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
+        <div class="fixed max-w-6xl mx-auto px-4 mt-6">
+            <a href="{{ route('p3k.show', ['id_p3k' => $id_p3k]) }}"
+            class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition">
+                ←
+            </a>
         </div>
-      </div>
+
+        <div class="max-w-7xl mx-auto px-4 mt-4 mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+            <h2 class="text-xl font-semibold text-[#196275] mb-5">Monitoring Stok P3K</h2>
+            <div class="flex flex-wrap gap-4 mb-6 text-xs text-gray-700">
+                <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-green-100 border border-green-400 rounded-sm shadow-sm"></div>
+                <span>Stok Aman (&gt; 70%)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-yellow-100 border border-yellow-400 rounded-sm shadow-sm"></div>
+                <span>Stok Rendah (30–70%)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-red-100 border border-red-400 rounded-sm shadow-sm"></div>
+                <span>Stok Kritis (&lt; 30%)</span>
+                </div>
+            </div>
+            <div class="overflow-x-auto rounded-lg border border-gray-200">
+                <table class="min-w-full text-[12px] text-gray-700 border-collapse">
+                <thead>
+                    <tr class="bg-[#1f7389] text-white text-center">
+                    <th rowspan="2" class="py-2 px-3 border border-gray-300 w-[40px]">No</th>
+                    <th rowspan="2" class="py-2 px-3 border border-gray-300 min-w-[200px] text-left">Nama Barang</th>
+                    <th rowspan="2" class="py-2 px-3 border border-gray-300">Standar<br>Jumlah</th>
+                    <th rowspan="2" class="py-2 px-3 border border-gray-300">Satuan</th>
+                    <th colspan="12" class="bg-[#146b6e] border border-gray-300">Pemakaian Per Bulan</th>
+                    <th rowspan="2" class="py-2 px-3 border border-gray-300 bg-blue-500">Stok<br>Akhir</th>
+                    <th rowspan="2" class="py-2 px-3 border border-gray-300 bg-yellow-400">Minimal<br>Stok</th>
+                    <th rowspan="2" class="py-2 px-3 border border-gray-300 bg-amber-500">Yang Harus<br>Diadakan</th>
+                    </tr>
+                    <tr class="bg-[#198f91] text-white text-center">
+                    @foreach(['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'] as $bulan)
+                        <th class="py-1 px-2 border border-gray-300">{{ $bulan }}</th>
+                    @endforeach
+                    </tr>
+                </thead>
+        
+                <tbody class="divide-y divide-gray-200">
+                    @foreach($stokData as $index => $item)
+                    @php
+                        $persenStok = ($item['stok_akhir'] / $item['standar']) * 100;
+                        $yangHarusDiadakan = max(0, $item['standar'] - $item['stok_akhir']);
+        
+                        if ($item['stok_akhir'] <= 0) {
+                            $stokClass = 'bg-red-100 text-red-700';
+                        } elseif ($persenStok < 30) {
+                            $stokClass = 'bg-red-100 text-red-700';
+                        } elseif ($persenStok < 70) {
+                            $stokClass = 'bg-yellow-100 text-yellow-700';
+                        } else {
+                            $stokClass = 'bg-green-100 text-green-700';
+                        }
+                    @endphp
+        
+                    <tr class="hover:bg-gray-50 transition-all duration-200">
+                        <td class="py-2 px-2 text-center border border-gray-200">{{ $index + 1 }}</td>
+                        <td class="py-2 px-3 text-left font-medium border border-gray-200">{{ $item['nama'] }}</td>
+                        <td class="py-2 px-2 border border-gray-200">{{ $item['standar'] }}</td>
+                        <td class="py-2 px-2 border border-gray-200">{{ $item['satuan'] }}</td>
+        
+                        @for($bulan = 1; $bulan <= 12; $bulan++)
+                        <td class="py-2 px-2 border border-gray-200">
+                            {{ $item['pemakaian_per_bulan'][$bulan] > 0 ? $item['pemakaian_per_bulan'][$bulan] : '' }}
+                        </td>
+                        @endfor
+        
+                        <td class="py-2 px-2 font-semibold border border-gray-200 {{ $stokClass }}">
+                        {{ $item['stok_akhir'] }}
+                        </td>
+                        <td class="py-2 px-2 border border-gray-200">{{ $item['minimal_stok'] }}</td>
+                        <td class="py-2 px-2 font-semibold border border-gray-200 {{ $yangHarusDiadakan > 0 ? 'bg-red-100 text-red-700' : '' }}">
+                        {{ $yangHarusDiadakan > 0 ? $yangHarusDiadakan : '' }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
 
     <script>
         function setBodyPadding() {
