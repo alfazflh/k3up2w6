@@ -6,59 +6,7 @@
     <title>Stok P3K - {{ $id_p3k }}</title>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/9/97/Logo_PLN.png" type="image/png" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .bg-primary { background-color: #1f7389; }
-        .text-primary { color: #196275; }
-        
-        .stok-table {
-            font-size: 11px;
-            border-collapse: collapse;
-        }
-        
-        .stok-table th,
-        .stok-table td {
-            border: 1px solid #d1d5db;
-            padding: 6px 8px;
-            text-align: center;
-        }
-        
-        .stok-table th {
-            background-color: #1f7389;
-            color: white;
-            font-weight: 600;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        
-        .stok-table .item-name {
-            text-align: left;
-            font-weight: 500;
-        }
-        
-        .stok-rendah {
-            background-color: #fef3c7 !important;
-        }
-        
-        .stok-habis {
-            background-color: #fee2e2 !important;
-        }
-        
-        .stok-aman {
-            background-color: #d1fae5 !important;
-        }
-        
-        .rotate-text {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            white-space: nowrap;
-        }
-
-        .container-wrapper {
-            max-width: 1800px;
-            margin: 0 auto;
-        }
-    </style>
+    
 </head>
 <body id="main-body" class="bg-white text-gray-800">
 
