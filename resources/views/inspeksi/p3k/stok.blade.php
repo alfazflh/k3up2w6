@@ -42,7 +42,7 @@
 
         <div class="flex flex-col text-center md:hidden">
             <h1 class="font-bold text-white leading-tight text-sm sm:text-lg">
-            MONITORING P3K
+            STOK P3K
             </h1>
             <h2 class="text-xs sm:text-sm text-white font-semibold">
             PLN PUSHARLIS UP2W VI
@@ -52,7 +52,7 @@
         <div class="absolute inset-x-0 text-center hidden md:block">
             <h1 class="font-bold text-white leading-tight"
                 style="font-size: clamp(1rem, 2vw + 0.5rem, 2rem);">
-                MONITORING P3K
+                STOK P3K
             </h1>
             <h2 class="text-sm sm:text-base md:text-xl text-white font-semibold mt-1">
             PLN PUSHARLIS UP2W VI
