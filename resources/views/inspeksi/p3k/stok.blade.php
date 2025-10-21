@@ -83,87 +83,104 @@
         </a>
     </div>
 
-        <div class="max-w-7xl mx-auto px-4 mt-6">
-        <div class="overflow-x-auto bg-white rounded-lg shadow-lg p-4">
-            <h2 class="text-lg font-bold text-[#196275] mb-4">Monitoring Stok P3K</h2>
-
-            <div class="flex flex-wrap gap-4 mb-4 text-xs">
+    <div class="max-w-7xl mx-auto px-4 mt-8">
+        <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+          <h2 class="text-xl font-semibold text-[#196275] mb-5">Monitoring Stok P3K</h2>
+      
+          <!-- Legend -->
+          <div class="flex flex-wrap gap-4 mb-6 text-xs text-gray-700">
             <div class="flex items-center gap-2">
-                <div class="w-4 h-4 bg-green-100 border border-green-400"></div>
-                <span>Stok Aman (&gt; 70%)</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <div class="w-4 h-4 bg-yellow-100 border border-yellow-400"></div>
-                <span>Stok Rendah (30–70%)</span>
+              <div class="w-4 h-4 bg-green-100 border border-green-400 rounded-sm shadow-sm"></div>
+              <span>Stok Aman (&gt; 70%)</span>
             </div>
             <div class="flex items-center gap-2">
-                <div class="w-4 h-4 bg-red-100 border border-red-400"></div>
-                <span>Stok Kritis (&lt; 30%)</span>
+              <div class="w-4 h-4 bg-yellow-100 border border-yellow-400 rounded-sm shadow-sm"></div>
+              <span>Stok Rendah (30–70%)</span>
             </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-red-100 border border-red-400 rounded-sm shadow-sm"></div>
+              <span>Stok Kritis (&lt; 30%)</span>
             </div>
-
-            <div class="overflow-x-auto">
-            <table class="min-w-full border border-gray-300 text-[11px] text-center">
-                <thead class="bg-[#1f7389] text-white font-semibold sticky top-0">
-                <tr>
-                    <th rowspan="2" class="px-2 py-2 border border-gray-300 w-[40px]">No</th>
-                    <th rowspan="2" class="px-3 py-2 border border-gray-300 min-w-[180px] text-left">Nama Barang</th>
-                    <th rowspan="2" class="px-2 py-2 border border-gray-300 w-[80px]">Standar<br>Jumlah</th>
-                    <th rowspan="2" class="px-2 py-2 border border-gray-300 w-[60px]">Satuan</th>
-                    <th colspan="12" class="bg-green-700 border border-gray-300">Pemakaian Per Bulan</th>
-                    <th rowspan="2" class="px-2 py-2 border border-gray-300 bg-blue-500 w-[80px]">Stok<br>Akhir</th>
-                    <th rowspan="2" class="px-2 py-2 border border-gray-300 bg-yellow-400 w-[80px]">Minimal<br>Stok</th>
-                    <th rowspan="2" class="px-2 py-2 border border-gray-300 bg-yellow-500 w-[100px]">Yang Harus<br>Diadakan</th>
+          </div>
+      
+          <!-- Table Wrapper -->
+          <div class="overflow-x-auto rounded-lg border border-gray-200">
+            <table class="min-w-full text-[12px] text-gray-700 border-collapse">
+              <thead>
+                <tr class="bg-[#1f7389] text-white text-center">
+                  <th rowspan="2" class="py-2 px-3 border border-gray-300 w-[40px]">No</th>
+                  <th rowspan="2" class="py-2 px-3 border border-gray-300 min-w-[200px] text-left">Nama Barang</th>
+                  <th rowspan="2" class="py-2 px-3 border border-gray-300">Standar<br>Jumlah</th>
+                  <th rowspan="2" class="py-2 px-3 border border-gray-300">Satuan</th>
+                  <th colspan="12" class="bg-[#146b6e] border border-gray-300">Pemakaian Per Bulan</th>
+                  <th rowspan="2" class="py-2 px-3 border border-gray-300 bg-blue-500">Stok<br>Akhir</th>
+                  <th rowspan="2" class="py-2 px-3 border border-gray-300 bg-yellow-400">Minimal<br>Stok</th>
+                  <th rowspan="2" class="py-2 px-3 border border-gray-300 bg-amber-500">Yang Harus<br>Diadakan</th>
                 </tr>
-                <tr>
-                    @foreach(['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'] as $bulan)
-                    <th class="px-2 py-1 bg-green-700 border border-gray-300 w-[50px]">{{ $bulan }}</th>
-                    @endforeach
+                <tr class="bg-[#198f91] text-white text-center">
+                  @foreach(['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'] as $bulan)
+                    <th class="py-1 px-2 border border-gray-300">{{ $bulan }}</th>
+                  @endforeach
                 </tr>
-                </thead>
-
-                <tbody>
+              </thead>
+      
+              <tbody class="divide-y divide-gray-200">
                 @foreach($stokData as $index => $item)
-                    @php
+                  @php
                     $persenStok = ($item['stok_akhir'] / $item['standar']) * 100;
                     $yangHarusDiadakan = max(0, $item['standar'] - $item['stok_akhir']);
-                    
+      
                     if ($item['stok_akhir'] <= 0) {
-                        $stokClass = 'bg-red-100';
+                        $stokClass = 'bg-red-100 text-red-700';
                     } elseif ($persenStok < 30) {
-                        $stokClass = 'bg-red-100';
+                        $stokClass = 'bg-red-100 text-red-700';
                     } elseif ($persenStok < 70) {
-                        $stokClass = 'bg-yellow-100';
+                        $stokClass = 'bg-yellow-100 text-yellow-700';
                     } else {
-                        $stokClass = 'bg-green-100';
+                        $stokClass = 'bg-green-100 text-green-700';
                     }
-                    @endphp
-                    <tr class="border border-gray-300 hover:bg-gray-50">
-                    <td class="px-2 py-1">{{ $index + 1 }}</td>
-                    <td class="px-2 py-1 text-left font-medium">{{ $item['nama'] }}</td>
-                    <td class="px-2 py-1">{{ $item['standar'] }}</td>
-                    <td class="px-2 py-1">{{ $item['satuan'] }}</td>
-
+                  @endphp
+      
+                  <tr class="hover:bg-gray-50 transition-all duration-200">
+                    <td class="py-2 px-2 text-center border border-gray-200">{{ $index + 1 }}</td>
+                    <td class="py-2 px-3 text-left font-medium border border-gray-200">{{ $item['nama'] }}</td>
+                    <td class="py-2 px-2 border border-gray-200">{{ $item['standar'] }}</td>
+                    <td class="py-2 px-2 border border-gray-200">{{ $item['satuan'] }}</td>
+      
                     @for($bulan = 1; $bulan <= 12; $bulan++)
-                        <td class="px-2 py-1">
+                      <td class="py-2 px-2 border border-gray-200">
                         {{ $item['pemakaian_per_bulan'][$bulan] > 0 ? $item['pemakaian_per_bulan'][$bulan] : '' }}
-                        </td>
+                      </td>
                     @endfor
-
-                    <td class="px-2 py-1 font-semibold {{ $stokClass }}">
-                        {{ $item['stok_akhir'] }}
+      
+                    <td class="py-2 px-2 font-semibold border border-gray-200 {{ $stokClass }}">
+                      {{ $item['stok_akhir'] }}
                     </td>
-                    <td class="px-2 py-1">{{ $item['minimal_stok'] }}</td>
-                    <td class="px-2 py-1 font-semibold {{ $yangHarusDiadakan > 0 ? 'bg-red-100' : '' }}">
-                        {{ $yangHarusDiadakan > 0 ? $yangHarusDiadakan : '' }}
+                    <td class="py-2 px-2 border border-gray-200">{{ $item['minimal_stok'] }}</td>
+                    <td class="py-2 px-2 font-semibold border border-gray-200 {{ $yangHarusDiadakan > 0 ? 'bg-red-100 text-red-700' : '' }}">
+                      {{ $yangHarusDiadakan > 0 ? $yangHarusDiadakan : '' }}
                     </td>
-                    </tr>
+                  </tr>
                 @endforeach
-                </tbody>
+              </tbody>
             </table>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
+
+    <script>
+        function setBodyPadding() {
+            const header = document.getElementById('main-header');
+            const spacer = document.getElementById('spacer');
+            if (header && spacer) {
+                const headerHeight = header.offsetHeight;
+                spacer.style.paddingTop = `${headerHeight + 3}px`; 
+            }
+        }
+    
+        window.addEventListener('load', setBodyPadding);
+        window.addEventListener('resize', setBodyPadding);
+    </script>
 
 
 </body>
