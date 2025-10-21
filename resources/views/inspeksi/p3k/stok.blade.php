@@ -6,7 +6,13 @@
     <title>Stok P3K - {{ $id_p3k }}</title>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/9/97/Logo_PLN.png" type="image/png" />
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    @vite('resources/css/app.css')
+    <style>
+        .bg-primary { background-color: #1f7389; }
+        .text-primary { color: #196275; }
+        .hover\:bg-primary-dark:hover { background-color: #134e5a; }
+    </style>
+
 </head>
 <body id="main-body" class="bg-white text-gray-800">
 
@@ -77,102 +83,88 @@
         </a>
     </div>
 
-    <!-- Main Content -->
-    <div class="max-w-6xl mx-auto px-4 mt-6">
-        <div class="overflow-x-auto rounded-lg shadow">
-        <div class="bg-white rounded-lg shadow-lg p-4 overflow-x-auto">
-            <h2 class="text-lg font-bold text-primary mb-4">Monitoring Stok P3K</h2>
-            
-            <!-- Legend -->
-            <div class="flex gap-4 mb-4 text-xs">
-                <div class="flex items-center gap-2">
-                    <div class="w-4 h-4 stok-aman border"></div>
-                    <span>Stok Aman (> 70%)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <div class="w-4 h-4 stok-rendah border"></div>
-                    <span>Stok Rendah (30-70%)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <div class="w-4 h-4 stok-habis border"></div>
-                    <span>Stok Kritis (< 30%)</span>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 mt-6">
+        <div class="overflow-x-auto bg-white rounded-lg shadow-lg p-4">
+            <h2 class="text-lg font-bold text-[#196275] mb-4">Monitoring Stok P3K</h2>
+
+            <div class="flex flex-wrap gap-4 mb-4 text-xs">
+            <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-green-100 border border-green-400"></div>
+                <span>Stok Aman (&gt; 70%)</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-yellow-100 border border-yellow-400"></div>
+                <span>Stok Rendah (30–70%)</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-red-100 border border-red-400"></div>
+                <span>Stok Kritis (&lt; 30%)</span>
+            </div>
             </div>
 
-            <table class="stok-table w-full">
-                <thead>
-                    <tr>
-                        <th rowspan="2" style="width: 40px;">No</th>
-                        <th rowspan="2" style="min-width: 200px;">Nama Barang</th>
-                        <th rowspan="2" style="width: 80px;">Standar<br>Jumlah</th>
-                        <th rowspan="2" style="width: 60px;">Satuan</th>
-                        <th colspan="12" style="background-color: #059669;">Pemakaian Per Bulan</th>
-                        <th rowspan="2" style="width: 80px; background-color: #3b82f6;">Stok<br>Akhir</th>
-                        <th rowspan="2" style="width: 80px; background-color: #fbbf24;">Minimal<br>Stok</th>
-                        <th rowspan="2" style="width: 100px; background-color: #eab308;">Yang Harus<br>Diadakan</th>
-                    </tr>
-                    <tr>
-                        <th style="width: 50px; background-color: #059669;">Jan</th>
-                        <th style="width: 50px; background-color: #059669;">Feb</th>
-                        <th style="width: 50px; background-color: #059669;">Mar</th>
-                        <th style="width: 50px; background-color: #059669;">Apr</th>
-                        <th style="width: 50px; background-color: #059669;">Mei</th>
-                        <th style="width: 50px; background-color: #059669;">Jun</th>
-                        <th style="width: 50px; background-color: #059669;">Jul</th>
-                        <th style="width: 50px; background-color: #059669;">Agu</th>
-                        <th style="width: 50px; background-color: #059669;">Sep</th>
-                        <th style="width: 50px; background-color: #059669;">Okt</th>
-                        <th style="width: 50px; background-color: #059669;">Nov</th>
-                        <th style="width: 50px; background-color: #059669;">Des</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($stokData as $index => $item)
-                    @php
-                        $persenStok = ($item['stok_akhir'] / $item['standar']) * 100;
-                        $yangHarusDiadakan = max(0, $item['standar'] - $item['stok_akhir']);
-                        
-                        // Tentukan class berdasarkan persentase stok
-                        if ($item['stok_akhir'] <= 0) {
-                            $stokClass = 'stok-habis';
-                        } elseif ($persenStok < 30) {
-                            $stokClass = 'stok-habis';
-                        } elseif ($persenStok < 70) {
-                            $stokClass = 'stok-rendah';
-                        } else {
-                            $stokClass = 'stok-aman';
-                        }
-                    @endphp
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td class="item-name">{{ $item['nama'] }}</td>
-                        <td>{{ $item['standar'] }}</td>
-                        <td>{{ $item['satuan'] }}</td>
-                        
-                        <!-- Pemakaian per bulan -->
-                        @for($bulan = 1; $bulan <= 12; $bulan++)
-                            <td>{{ $item['pemakaian_per_bulan'][$bulan] > 0 ? $item['pemakaian_per_bulan'][$bulan] : '' }}</td>
-                        @endfor
-                        
-                        <!-- Stok Akhir -->
-                        <td class="{{ $stokClass }}" style="font-weight: 600;">
-                            {{ $item['stok_akhir'] }}
-                        </td>
-                        
-                        <!-- Minimal Stok -->
-                        <td>{{ $item['minimal_stok'] }}</td>
-                        
-                        <!-- Yang Harus Diadakan -->
-                        <td class="{{ $yangHarusDiadakan > 0 ? 'stok-habis' : '' }}" style="font-weight: 600;">
-                            {{ $yangHarusDiadakan > 0 ? $yangHarusDiadakan : '' }}
-                        </td>
-                    </tr>
+            <div class="overflow-x-auto">
+            <table class="min-w-full border border-gray-300 text-[11px] text-center">
+                <thead class="bg-[#1f7389] text-white font-semibold sticky top-0">
+                <tr>
+                    <th rowspan="2" class="px-2 py-2 border border-gray-300 w-[40px]">No</th>
+                    <th rowspan="2" class="px-3 py-2 border border-gray-300 min-w-[180px] text-left">Nama Barang</th>
+                    <th rowspan="2" class="px-2 py-2 border border-gray-300 w-[80px]">Standar<br>Jumlah</th>
+                    <th rowspan="2" class="px-2 py-2 border border-gray-300 w-[60px]">Satuan</th>
+                    <th colspan="12" class="bg-green-700 border border-gray-300">Pemakaian Per Bulan</th>
+                    <th rowspan="2" class="px-2 py-2 border border-gray-300 bg-blue-500 w-[80px]">Stok<br>Akhir</th>
+                    <th rowspan="2" class="px-2 py-2 border border-gray-300 bg-yellow-400 w-[80px]">Minimal<br>Stok</th>
+                    <th rowspan="2" class="px-2 py-2 border border-gray-300 bg-yellow-500 w-[100px]">Yang Harus<br>Diadakan</th>
+                </tr>
+                <tr>
+                    @foreach(['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'] as $bulan)
+                    <th class="px-2 py-1 bg-green-700 border border-gray-300 w-[50px]">{{ $bulan }}</th>
                     @endforeach
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach($stokData as $index => $item)
+                    @php
+                    $persenStok = ($item['stok_akhir'] / $item['standar']) * 100;
+                    $yangHarusDiadakan = max(0, $item['standar'] - $item['stok_akhir']);
+                    
+                    if ($item['stok_akhir'] <= 0) {
+                        $stokClass = 'bg-red-100';
+                    } elseif ($persenStok < 30) {
+                        $stokClass = 'bg-red-100';
+                    } elseif ($persenStok < 70) {
+                        $stokClass = 'bg-yellow-100';
+                    } else {
+                        $stokClass = 'bg-green-100';
+                    }
+                    @endphp
+                    <tr class="border border-gray-300 hover:bg-gray-50">
+                    <td class="px-2 py-1">{{ $index + 1 }}</td>
+                    <td class="px-2 py-1 text-left font-medium">{{ $item['nama'] }}</td>
+                    <td class="px-2 py-1">{{ $item['standar'] }}</td>
+                    <td class="px-2 py-1">{{ $item['satuan'] }}</td>
+
+                    @for($bulan = 1; $bulan <= 12; $bulan++)
+                        <td class="px-2 py-1">
+                        {{ $item['pemakaian_per_bulan'][$bulan] > 0 ? $item['pemakaian_per_bulan'][$bulan] : '' }}
+                        </td>
+                    @endfor
+
+                    <td class="px-2 py-1 font-semibold {{ $stokClass }}">
+                        {{ $item['stok_akhir'] }}
+                    </td>
+                    <td class="px-2 py-1">{{ $item['minimal_stok'] }}</td>
+                    <td class="px-2 py-1 font-semibold {{ $yangHarusDiadakan > 0 ? 'bg-red-100' : '' }}">
+                        {{ $yangHarusDiadakan > 0 ? $yangHarusDiadakan : '' }}
+                    </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
-    </div>
-    </div>
+        </div>
+
 
 </body>
 </html>
