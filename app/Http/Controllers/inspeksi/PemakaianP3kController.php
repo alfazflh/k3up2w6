@@ -472,22 +472,81 @@ class PemakaianP3kController extends Controller
     }
 
     public function stok($id_p3k)
-{
-    try {
-        $data = P3k::where('id_p3k', $id_p3k)->first();
-
-        if (!$data) {
-            return redirect()->back()->with('error', 'Data stok tidak ditemukan.');
+    {
+        // Ambil data P3K
+        $p3k = P3k::where('id_p3k', $id_p3k)->latest('updated_at')->first();
+        
+        if (!$p3k) {
+            return redirect()->route('p3k.index')->with('error', 'Data P3K tidak ditemukan');
         }
-
-        return view('inspeksi.p3k.stok', [
-            'title' => 'Stok P3K ' . $id_p3k,
-            'data' => $data,
-            'id_p3k' => $id_p3k
-        ]);
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+    
+        // Ambil semua data pemeriksaan (untuk stok awal dan pemakaian)
+        $pemeriksaans = PemeriksaanP3k::where('id_p3k', $id_p3k)
+            ->orderBy('tanggal_pemeriksaan')
+            ->get();
+    
+        // Daftar item standar P3K
+        $standardItems = [
+            'Kasa Steril Terbungkus' => ['standar' => 20, 'satuan' => 'Bh'],
+            'Perban (lebar 5 cm)' => ['standar' => 2, 'satuan' => 'Bh'],
+            'Perban (lebar 10 cm)' => ['standar' => 2, 'satuan' => 'Bh'],
+            'Plester (lebar 1.25 cm)' => ['standar' => 2, 'satuan' => 'Bh'],
+            'Plester Cepat' => ['standar' => 10, 'satuan' => 'Bh'],
+            'Kapas (25 gram)' => ['standar' => 1, 'satuan' => 'Bh'],
+            'Kain segitiga/mitella' => ['standar' => 2, 'satuan' => 'Bh'],
+            'Gunting' => ['standar' => 1, 'satuan' => 'Bh'],
+            'Peniti' => ['standar' => 12, 'satuan' => 'Bh'],
+            'Sarung tangan sekali pakai' => ['standar' => 2, 'satuan' => 'Pasang'],
+            '(pasangan)' => ['standar' => 2, 'satuan' => 'Pack'],
+            'Masker' => ['standar' => 1, 'satuan' => 'Pack'],
+            'Pinset' => ['standar' => 1, 'satuan' => 'Bh'],
+            'Lampu Senter' => ['standar' => 1, 'satuan' => 'Bh'],
+            'Gelas untuk cuci mata' => ['standar' => 1, 'satuan' => 'Bh'],
+            'Kantong plastik bersih' => ['standar' => 1, 'satuan' => 'Pack'],
+            'Aquades (100 ml lar. Saline)' => ['standar' => 1, 'satuan' => 'Bh'],
+            'Povidon iodin (60 ml)' => ['standar' => 1, 'satuan' => 'Bh'],
+            'Alkohol 70%' => ['standar' => 1, 'satuan' => 'Bh'],
+            'Buku panduan P3K di tempat kerja' => ['standar' => 1, 'satuan' => 'Bh'],
+            'Buku catatan Daftar isi kotak P3K' => ['standar' => 1, 'satuan' => 'Bh'],
+        ];
+    
+        // Hitung pemakaian per bulan dan total stok
+        $stokData = [];
+        
+        foreach ($standardItems as $itemName => $itemInfo) {
+            $itemData = [
+                'nama' => $itemName,
+                'standar' => $itemInfo['standar'],
+                'satuan' => $itemInfo['satuan'],
+                'pemakaian_per_bulan' => [],
+                'stok_akhir' => $itemInfo['standar'], // Mulai dengan stok standar
+                'minimal_stok' => ceil($itemInfo['standar'] * 0.3), // 30% dari standar
+            ];
+    
+            // Hitung pemakaian per bulan (Januari - Desember)
+            for ($bulan = 1; $bulan <= 12; $bulan++) {
+                $pemakaianBulan = $pemeriksaans->filter(function($p) use ($bulan, $itemName) {
+                    $bulanPemeriksaan = date('n', strtotime($p->tanggal_pemeriksaan));
+                    // Cocokkan nama item (case-insensitive, trim whitespace)
+                    $itemMatch = strtolower(trim($p->item)) === strtolower(trim($itemName));
+                    return $bulanPemeriksaan == $bulan && $itemMatch && !empty($p->nama) && $p->nama !== '-';
+                });
+    
+                $totalPemakaian = 0;
+                foreach ($pemakaianBulan as $p) {
+                    // Extract angka dari jumlah (contoh: "2 buah" -> 2)
+                    preg_match('/\d+/', $p->jumlah, $matches);
+                    $totalPemakaian += isset($matches[0]) ? (int)$matches[0] : 0;
+                }
+    
+                $itemData['pemakaian_per_bulan'][$bulan] = $totalPemakaian;
+                $itemData['stok_akhir'] -= $totalPemakaian; // Kurangi stok
+            }
+    
+            $stokData[] = $itemData;
+        }
+    
+        return view('inspeksi.p3k.stok', compact('p3k', 'id_p3k', 'stokData'));
     }
-}
 
 }
