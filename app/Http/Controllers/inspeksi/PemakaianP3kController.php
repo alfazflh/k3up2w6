@@ -470,4 +470,23 @@ class PemakaianP3kController extends Controller
             return redirect()->back()->with('error', 'Gagal mengupdate data pemakaian: ' . $e->getMessage());
         }
     }
+
+    public function stok($id_p3k)
+{
+    try {
+        $data = P3k::where('id_p3k', $id_p3k)->first();
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data stok tidak ditemukan.');
+        }
+
+        return view('inspeksi.p3k.stok', [
+            'title' => 'Stok P3K ' . $id_p3k,
+            'data' => $data
+        ]);
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+    }
+}
+
 }
