@@ -84,6 +84,15 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-4 mt-4 mb-8">
+            <form method="GET" class="mb-4">
+                <select name="tahun" onchange="this.form.submit()" class="border rounded px-2 py-1">
+                  @foreach(range(date('Y') - 2, date('Y')) as $t)
+                    <option value="{{ $t }}" {{ request('tahun', date('Y')) == $t ? 'selected' : '' }}>
+                      Tahun {{ $t }}
+                    </option>
+                  @endforeach
+                </select>
+              </form>              
             <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
             <h2 class="text-xl font-semibold text-[#196275] mb-5">Monitoring Stok P3K</h2>
             <div class="flex flex-wrap gap-4 mb-6 text-xs text-gray-700">

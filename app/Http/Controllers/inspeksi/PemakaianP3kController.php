@@ -481,9 +481,11 @@ class PemakaianP3kController extends Controller
         }
     
         // Ambil semua data pemeriksaan (untuk stok awal dan pemakaian)
+        $tahunDipilih = request()->get('tahun', date('Y'));
         $pemeriksaans = PemeriksaanP3k::where('id_p3k', $id_p3k)
-            ->orderBy('tanggal_pemeriksaan')
-            ->get();
+    ->whereYear('tanggal_pemeriksaan', $tahunDipilih)
+    ->orderBy('tanggal_pemeriksaan')
+    ->get();
     
         // Daftar item standar P3K
         $standardItems = [
