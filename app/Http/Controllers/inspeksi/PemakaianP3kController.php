@@ -561,7 +561,7 @@ class PemakaianP3kController extends Controller
     $total = $data->sum('stok_akhir');
 
     // Tampilkan ke view (opsional)
-    return view('inspeksi.pemakaian_p3k.stoktotal', compact('data', 'total'));
+    return view('inspeksi.p3k.stoktotal', compact('data', 'total'));
 }
 
 
