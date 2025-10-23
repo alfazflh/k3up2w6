@@ -86,7 +86,7 @@
             <div class="max-w-7xl mx-auto px-4 mt-6 mb-10">
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
-                    <h2 class="text-2xl font-semibold text-[#196275]">Monitoring Stok P3K</h2>
+                    <h2 class="text-2xl font-semibold text-[#196275]">Monitoring Stok P3K - {{ $id_p3k }}</h2>
                         <form method="GET" class="flex items-center">
                             @php
                                 $tahunSekarang = date('Y');
