@@ -94,8 +94,8 @@
                 </a>
             @endforeach
         </div>
-    </div>
-    <a href="{{ route('p3k.stoktotal') }}"
+    </br>
+        <a href="{{ route('p3k.stoktotal') }}"
         class="flex flex-col items-center justify-center bg-gray-100 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 p-6">
          <img src="https://img.pikbest.com/origin/09/29/33/252pIkbEsTdEN.png!sw800"
               alt="stok Inspeksi" class="h-28 md:h-36 object-contain">
@@ -103,6 +103,7 @@
              STOK TOTAL P3K
          </span>
      </a>
+    </div>
 
     @auth
     @if(in_array(Auth::user()->role, ['superadmin', 'admin']))

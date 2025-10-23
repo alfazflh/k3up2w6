@@ -139,6 +139,7 @@ Route::prefix('inspeksi')->group(function () {
         Route::post('/edit-sequential', 'editSequentialForm')->name('pemakaian-p3k.edit-sequential');
         Route::put('/{id}/update-step', 'updateStep')->name('pemakaian-p3k.update-step');
         Route::get('/{id_p3k}/stok', [PemakaianP3kController::class, 'stok'])->name('p3k.stok');
+        Route::get('/stoktotal', [PemakaianP3kController::class, 'stoktotal'])->name('p3k.stoktotal');
     });
 
     Route::resource('saran', SaranController::class)->except(['show']);
