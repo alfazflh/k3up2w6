@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Inspeksi;
 use App\Http\Controllers\Controller;
 use App\Models\PemeriksaanP3k;
 use App\Models\P3k;
+use App\Models\P3kItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -550,5 +551,18 @@ class PemakaianP3kController extends Controller
     
         return view('inspeksi.p3k.stok', compact('p3k', 'id_p3k', 'stokData'));
     }
+
+    public function stoktotal()
+{
+    // Contoh: ambil semua data dari tabel p3k_items
+    $data = \App\Models\P3KItem::all();
+
+    // Misal kamu mau hitung stok total:
+    $total = $data->sum('stok_akhir');
+
+    // Tampilkan ke view (opsional)
+    return view('inspeksi.pemakaian_p3k.stoktotal', compact('data', 'total'));
+}
+
 
 }
