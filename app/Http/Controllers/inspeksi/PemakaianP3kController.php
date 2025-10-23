@@ -554,13 +554,10 @@ class PemakaianP3kController extends Controller
 
     public function stoktotal()
 {
-    // Contoh: ambil semua data dari tabel p3k_items
     $data = \App\Models\P3KItem::all();
 
-    // Misal kamu mau hitung stok total:
     $total = $data->sum('stok_akhir');
 
-    // Tampilkan ke view (opsional)
     return view('inspeksi.p3k.stoktotal', compact('data', 'total'));
 }
 
